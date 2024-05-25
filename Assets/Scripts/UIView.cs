@@ -25,32 +25,56 @@ namespace Scripts {
             _keyImage.sprite = Sprite.Create(keyTexture, new Rect(0f, 0f, keyTexture.width, keyTexture.height), Vector2.zero);
         }
 
-        public void UpdateView(bool isAnimated = false) {
+        public void UpdateView() {
 
-            UpdateCoinAmount(isAnimated);
-            UpdateEnergyAmount(isAnimated);
-            UpdateKeysAmount(isAnimated);
+            UpdateCoinAmount();
+            UpdateEnergyAmount();
+            UpdateKeysAmount();
         }
 
-        private async void UpdateCoinAmount(bool isAnimated = false) {
+        private void UpdateCoinAmount() {
+            
+            UpdateCoinAmount(0, 0, false);
+        }
+
+        public async void UpdateCoinAmount(long startAmount, long endAmount, bool isAnimated = false) {
 
             if (isAnimated) {
                 
-                await StringUtils.RollNumber(_coinAmount, Int64.Parse(_coinAmount.text), _gameModel.Coins, _rollUpTime);
+                await StringUtils.RollNumber(_coinAmount, startAmount, endAmount, _rollUpTime);
             }
-            _coinAmount.text = _gameModel.Coins.ToString();
-        }
-
-        private async void UpdateEnergyAmount(bool isAnimated = false) {
             
-            await StringUtils.RollNumber(_energyAmount, Int64.Parse(_energyAmount.text), _gameModel.Energy, _rollUpTime);
-            _energyAmount.text = _gameModel.Energy.ToString();
+            _coinAmount.text = StringUtils.NumberToShortString(_gameModel.Coins);
         }
 
-        private async void UpdateKeysAmount(bool isAnimated = false) {
+        private void UpdateEnergyAmount() {
+            
+            UpdateEnergyAmount(0, 0, false);
+        }
 
-            await StringUtils.RollNumber(_keysAmount, Int64.Parse(_keysAmount.text), _gameModel.Keys, _rollUpTime);
-            _keysAmount.text = _gameModel.Keys.ToString();
+        public async void UpdateEnergyAmount(int startAmount, int endAmount, bool isAnimated = false) {
+
+            if (isAnimated) {
+                
+                await StringUtils.RollNumber(_energyAmount, Int32.Parse(_energyAmount.text), _gameModel.Energy, _rollUpTime);
+            }
+            
+            _energyAmount.text = StringUtils.NumberToShortString(_gameModel.Energy);
+        }
+
+        private void UpdateKeysAmount() {
+            
+            UpdateKeysAmount(0, 0, false);
+        }
+
+        public async void UpdateKeysAmount(int startAmount, int endAmount, bool isAnimated = false) {
+
+            if (isAnimated) {
+                
+                await StringUtils.RollNumber(_keysAmount, Int32.Parse(_keysAmount.text), _gameModel.Keys, _rollUpTime);
+            }
+            
+            _keysAmount.text = StringUtils.NumberToShortString(_gameModel.Keys);
         }
 
         public void Initialize(GameModel gameModel) {

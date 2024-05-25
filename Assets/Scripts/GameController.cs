@@ -69,18 +69,19 @@ namespace Scripts {
                 
                 case PrizeType.Coins:
                     _gameModel.Coins += prize.Amount;
+                    _uiView.UpdateCoinAmount(_gameModel.Coins - prize.Amount, _gameModel.Coins, true);
                     break;
                 
                 case PrizeType.Energy:
                     _gameModel.Energy += prize.Amount;
+                    _uiView.UpdateEnergyAmount(_gameModel.Energy - prize.Amount, _gameModel.Energy, true);
                     break;
                 
                 case PrizeType.Keys:
                     _gameModel.Keys += prize.Amount;
+                    _uiView.UpdateKeysAmount(_gameModel.Keys - prize.Amount, _gameModel.Keys, true);
                     break;
             }
-            
-            _uiView.UpdateView(true);
 
             if (_gameModel.Keys <= 0 || AreAllBoxesOpen()) {
 
@@ -99,7 +100,7 @@ namespace Scripts {
         private void PayKey(int numberOfKeys) {
 
             _gameModel.Keys-= numberOfKeys;
-            _uiView.UpdateView(true);
+            _uiView.UpdateKeysAmount(_gameModel.Keys + numberOfKeys, _gameModel.Keys, true);
         }
 
         private void EndGame() {
