@@ -68,8 +68,14 @@ namespace Scripts {
             
             var boxView = _boxViews[boxId];
             boxView.OnLidRemoved = null;
-            _smokeParticles.transform.position = _prizeContainers[boxId].transform.position;
             SetBoxPrize(boxId, _gameModel.GetNextPrize());
+            SetSmokeParticles(boxId);
+        }
+
+        private void SetSmokeParticles(int boxId) {
+
+            _smokeParticles.transform.position = _prizeContainers[boxId].transform.position;
+            _smokeParticles.Stop();
             _smokeParticles.Play();
         }
 
