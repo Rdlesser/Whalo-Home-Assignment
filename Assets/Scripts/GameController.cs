@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -41,8 +42,8 @@ namespace Scripts {
 
         private void InitGameView() {
 
-            _gameView.Initialize(_gameModel);
             _gameView.OnBoxClicked += HandleBoxClick;
+            _gameView.Initialize(_gameModel);
         }
 
         private void InitUIView() {
@@ -53,6 +54,7 @@ namespace Scripts {
         private void HandleBoxClick(int boxId) {
 
             PayKey(1);
+            _gameView.AreBoxesClickable = false;
             _gameView.OpenBox(boxId);
         }
 
@@ -61,6 +63,12 @@ namespace Scripts {
             _gameModel.Keys--;
             _uiView.UpdateView();
         }
+
+        private void OnDestroy() {
+
+            _gameView.OnBoxClicked -= HandleBoxClick;
+        }
+
     }
 
 }

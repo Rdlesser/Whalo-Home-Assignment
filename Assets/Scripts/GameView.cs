@@ -18,6 +18,11 @@ namespace Scripts {
         
         public Action<int> OnBoxClicked;
 
+        public bool AreBoxesClickable {
+            get;
+            set;
+        }
+
         public void Initialize(GameModel gameModel) {
 
             _gameModel = gameModel;
@@ -30,6 +35,11 @@ namespace Scripts {
 
         private void ReactToBoxClick(int boxId) {
 
+            if (!AreBoxesClickable) {
+                return;
+            }
+            
+            _boxButtons[boxId].onClick.RemoveAllListeners();
             OnBoxClicked?.Invoke(boxId);
         }
 
