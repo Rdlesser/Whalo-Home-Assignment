@@ -33,15 +33,15 @@ namespace Scripts {
             OnBoxClicked?.Invoke(boxId);
         }
 
-        public void OpenBox(int boxId, Prize prize) {
-
-            SetBoxPrize(boxId, prize);
+        public void OpenBox(int boxId) {
+            
             AnimateBoxOpening(boxId);
         }
 
         private void SetBoxPrize(int boxId, Prize prize) {
 
-            var prizeView = Instantiate(_prizeView, _prizeContainers[boxId].transform).GetComponent<PrizeView>();
+            var prizeObject = Instantiate(_prizeView, _prizeContainers[boxId].transform);
+            var prizeView = prizeObject.GetComponent<PrizeView>();
             prizeView.Initialize(prize);
         }
 
@@ -53,10 +53,11 @@ namespace Scripts {
         }
 
         private void AnimateSmokePoof(int boxId) {
-
+            
             var boxView = _boxViews[boxId];
             boxView.OnLidRemoved = null;
-            _smokeParticles.transform.position = boxView.transform.position;
+            _smokeParticles.transform.position = _prizeContainers[boxId].transform.position;
+            SetBoxPrize(boxId, _gameModel.GetNextPrize());
             _smokeParticles.Play();
         }
 

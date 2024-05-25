@@ -12,4 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a2d9828a522b7149b632291b1a414df, type: 3}
   m_Name: Prizes
   m_EditorClassIdentifier: 
-  Prizes: []
+  Prizes:
+  - PrizeType: 0
+    Sprite: {fileID: 21300000, guid: fc6a97c0e28dab544902a24b6924cce1, type: 3}
+    Amount: 1
+  - PrizeType: 0
+    Sprite: {fileID: 21300000, guid: fc6a97c0e28dab544902a24b6924cce1, type: 3}
+    Amount: 1
+  - PrizeType: 0
+    Sprite: {fileID: 21300000, guid: fc6a97c0e28dab544902a24b6924cce1, type: 3}
+    Amount: 2
+  - PrizeType: 0
+    Sprite: {fileID: 21300000, guid: fc6a97c0e28dab544902a24b6924cce1, type: 3}
+    Amount: 3
+  - PrizeType: 2
+    Sprite: {fileID: 21300000, guid: 03a02b94461558a41b3f522935f5ceca, type: 3}
+    Amount: 50
+  - PrizeType: 1
+    Sprite: {fileID: 21300000, guid: 1933ed32e666b904db6ab832bdd7fe7d, type: 3}
+    Amount: 1000
+  - PrizeType: 1
+    Sprite: {fileID: 21300000, guid: 1933ed32e666b904db6ab832bdd7fe7d, type: 3}
+    Amount: 1000
+  - PrizeType: 1
+    Sprite: {fileID: 21300000, guid: 1933ed32e666b904db6ab832bdd7fe7d, type: 3}
+    Amount: 1000
+  - PrizeType: 1
+    Sprite: {fileID: 21300000, guid: 1933ed32e666b904db6ab832bdd7fe7d, type: 3}
+    Amount: 5000

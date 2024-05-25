@@ -12,6 +12,7 @@ namespace Scripts {
         private static readonly int RemoveLid = Animator.StringToHash("RemoveLid");
 
         public void AnimateLidRemoval() {
+            
             _animator.SetTrigger(RemoveLid);
         }
 

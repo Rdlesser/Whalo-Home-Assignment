@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Scripts {
@@ -7,15 +8,11 @@ namespace Scripts {
 
         [SerializeField] private GameView _gameView;
         [SerializeField] private UIView _uiView;
-        [SerializeField] private string _coinURL;
-        [SerializeField] private string _energyURL;
-        [SerializeField] private string _keyURL;
+        [SerializeField] private PrizesScriptableObject _prizesScriptable;
 
         private GameModel _gameModel;
         
         private ServiceReceiver<IAssetService> _assetService = new();
-
-        private Queue<Prize> _prizes; 
 
         private void Start() {
 
@@ -30,7 +27,16 @@ namespace Scripts {
         private void InitGameModel() {
 
             //TODO: get number of coins/energy/keys from config file
-            _gameModel = new GameModel(0, 0, 2);
+            var prizeQueue = CreatePrizeQueue(_prizesScriptable.Prizes);
+            _gameModel = new GameModel(0, 0, 2, prizeQueue);
+        }
+
+        private Queue<Prize> CreatePrizeQueue(List<Prize> prizesScriptablePrizes) {
+
+            var prizes = new List<Prize>(prizesScriptablePrizes);
+            prizes.Shuffle();
+
+            return new Queue<Prize>(prizes);
         }
 
         private void InitGameView() {
@@ -47,8 +53,7 @@ namespace Scripts {
         private void HandleBoxClick(int boxId) {
 
             PayKey(1);
-            var prize = GetNextPrize();
-            _gameView.OpenBox(boxId, prize);
+            _gameView.OpenBox(boxId);
         }
 
         private void PayKey(int i) {
@@ -56,41 +61,6 @@ namespace Scripts {
             _gameModel.Keys--;
             _uiView.UpdateView();
         }
-
-        private async void InitUISprites() {
-
-            // var coinTexture = DownloadHandlerTexture.GetContent(await UnityWebRequestTexture.GetTexture(_coinURL).SendWebRequest());
-            // var energyTexture = DownloadHandlerTexture.GetContent(await UnityWebRequestTexture.GetTexture(_energyURL).SendWebRequest());
-            // var keyTexture = DownloadHandlerTexture.GetContent(await UnityWebRequestTexture.GetTexture(_keyURL).SendWebRequest());
-            // _uiView.SetIcons(coinTexture, energyTexture, keyTexture);
-        }
-
-        private void InitPrizeQueue() {
-            
-            
-        }
-
-        private void RegisterToBoxViewEvents() {
-
-            // for (int i = 0; i < _boxes.Count; i++) {
-            //
-            //     _boxes[i].OnBoxClicked += HandleBoxClick;
-            // }
-        }
-
-        private void HandleBoxClick(BoxView box) {
-
-            var prize = GetNextPrize();
-            
-        }
-
-        private Prize GetNextPrize() {
-
-            var prize = _prizes.Dequeue();
-
-            return prize;
-        }
-
     }
 
 }

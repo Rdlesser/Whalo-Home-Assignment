@@ -8,6 +8,9 @@ namespace Scripts {
 
         [SerializeField] private Image _prizeImage;
         [SerializeField] private TMP_Text _prizeAmount;
+        [SerializeField] private Animator _prizeAnimator;
+        
+        private static readonly int In = Animator.StringToHash("In");
 
         public void Initialize(Sprite prizeImage, int prizeAmount) {
 
@@ -18,6 +21,7 @@ namespace Scripts {
         public void Initialize(Prize prize) {
             
             Initialize(prize.Sprite, prize.Amount);
+            _prizeAnimator.SetTrigger(In);
         }
 
     }
