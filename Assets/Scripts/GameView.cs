@@ -9,13 +9,14 @@ namespace Scripts {
 
         [SerializeField] private List<Button> _boxButtons;
         [SerializeField] private List<GameObject> _prizeContainers;
-        [SerializeField] private Animator _boxAnimator;
-        [SerializeField] private PrizeView _prizeView;
+        [SerializeField] private List<BoxView> _boxViews;
+        [SerializeField] private GameObject _prizeView;
+        [SerializeField] private ParticleSystem _smokeParticles;
 
         private GameModel _gameModel;
-
+        
+        
         public Action<int> OnBoxClicked;
-        private static readonly int RemoveLid = Animator.StringToHash("RemoveLid");
 
         public void Initialize(GameModel gameModel) {
 
@@ -40,13 +41,23 @@ namespace Scripts {
 
         private void SetBoxPrize(int boxId, Prize prize) {
 
-            var prizeView = Instantiate(_prizeView, _prizeContainers[boxId].transform);
+            var prizeView = Instantiate(_prizeView, _prizeContainers[boxId].transform).GetComponent<PrizeView>();
             prizeView.Initialize(prize);
         }
 
         private void AnimateBoxOpening(int boxId) {
-            
-            _boxAnimator.SetTrigger(RemoveLid);
+
+            var boxView = _boxViews[boxId];
+            boxView.OnLidRemoved += () => AnimateSmokePoof(boxId);
+            _boxViews[boxId].AnimateLidRemoval();
+        }
+
+        private void AnimateSmokePoof(int boxId) {
+
+            var boxView = _boxViews[boxId];
+            boxView.OnLidRemoved = null;
+            _smokeParticles.transform.position = boxView.transform.position;
+            _smokeParticles.Play();
         }
 
         private void OnDestroy() {
