@@ -1,4 +1,6 @@
 ﻿using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Scripts {
 
@@ -6,6 +8,7 @@ namespace Scripts {
     public class Prize {
 
         public PrizeType PrizeType;
+        [FormerlySerializedAs("PrizeSprite")] public Sprite Sprite;
         public int Amount;
 
     }

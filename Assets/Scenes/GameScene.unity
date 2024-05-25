@@ -2767,6 +2767,7 @@ GameObject:
   - component: {fileID: 1450185105550431153}
   - component: {fileID: 8670584267526027221}
   - component: {fileID: 8670584267526027222}
+  - component: {fileID: 8670584267526027223}
   m_Layer: 10
   m_Name: Camera
   m_TagString: Untagged
@@ -7453,11 +7454,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d49507af3700481aa7f24a70e6b1ea03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boxes: []
+  _gameView: {fileID: 8670584267526027223}
   _uiView: {fileID: 8713984028622220481}
   _coinURL: https://drive.google.com/drive/folders/1Yk9OMu63eRmhdi1OtfR237Oj36852mFs/uc?export=download&id=1STe0U77LPpDHry2E-TrLwnvNxC1xY9f4
   _energyURL: 
   _keyURL: 
+--- !u!114 &8670584267526027223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450185105550431117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb9af07d5f4689bba3c58357c64ded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _boxButtons:
+  - {fileID: 3236537433271412977}
+  - {fileID: 6327687159482934240}
+  - {fileID: 1571893600391097161}
+  - {fileID: 3929503460545294201}
+  - {fileID: 4467441300447086044}
+  - {fileID: 6008093261538624119}
+  - {fileID: 2928651359009086513}
+  - {fileID: 8208026888047995583}
+  - {fileID: 3151480151213025770}
 --- !u!224 &8713984028622220480
 RectTransform:
   m_ObjectHideFlags: 0
