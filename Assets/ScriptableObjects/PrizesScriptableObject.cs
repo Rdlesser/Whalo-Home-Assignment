@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace ScriptableObjects {
 
-    [CreateAssetMenu(fileName = "Prizes", menuName = "ScriptableObjects/Prizes Object", order = 1)]
+    [CreateAssetMenu(fileName = "Prizes", menuName = "ScriptableObjects/Prizes Object", order = 2)]
     [Serializable]
     public class PrizesScriptableObject : ScriptableObject {
 
-        [SerializeField] public List<Prize> Prizes;
+        [SerializeField] public List<Prize> PrizeList;
     }
 
 }

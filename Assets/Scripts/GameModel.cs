@@ -4,13 +4,13 @@ namespace Scripts {
 
     public class GameModel {
 
-        public int Coins;
+        public long Coins;
         public int Energy;
         public int Keys;
 
         private Queue<Prize> Prizes;
 
-        public GameModel(int coins, int energy, int keys, Queue<Prize> prizes) {
+        public GameModel(long coins, int energy, int keys, Queue<Prize> prizes) {
             
             Coins = coins;
             Energy = energy;

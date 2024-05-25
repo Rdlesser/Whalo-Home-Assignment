@@ -4746,7 +4746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameView: {fileID: 8670584267526027223}
   _uiView: {fileID: 8713984028622220481}
-  _prizesScriptable: {fileID: 11400000, guid: a9c77f1ad6cdf1443b3dc7c1d39c33bb, type: 2}
+  _gameConfig: {fileID: 11400000, guid: 58bfd0b13b7d12e469c4adf6ceecc530, type: 2}
 --- !u!114 &8670584267526027223
 MonoBehaviour:
   m_ObjectHideFlags: 0

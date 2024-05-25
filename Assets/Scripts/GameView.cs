@@ -31,6 +31,8 @@ namespace Scripts {
                 var boxId = i;
                 _boxButtons[i].onClick.AddListener(() => ReactToBoxClick(boxId));
             }
+
+            AreBoxesClickable = true;
         }
 
         private void ReactToBoxClick(int boxId) {

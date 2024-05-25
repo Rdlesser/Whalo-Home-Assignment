@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ namespace Scripts {
 
         [SerializeField] private GameView _gameView;
         [SerializeField] private UIView _uiView;
-        [SerializeField] private PrizesScriptableObject _prizesScriptable;
+        [SerializeField] private GameConfig _gameConfig;
 
         private GameModel _gameModel;
         
@@ -28,8 +27,8 @@ namespace Scripts {
         private void InitGameModel() {
 
             //TODO: get number of coins/energy/keys from config file
-            var prizeQueue = CreatePrizeQueue(_prizesScriptable.Prizes);
-            _gameModel = new GameModel(0, 0, 2, prizeQueue);
+            var prizeQueue = CreatePrizeQueue(_gameConfig.Prizes.PrizeList);
+            _gameModel = new GameModel(_gameConfig.Coins, _gameConfig.Energy, _gameConfig.Keys, prizeQueue);
         }
 
         private Queue<Prize> CreatePrizeQueue(List<Prize> prizesScriptablePrizes) {

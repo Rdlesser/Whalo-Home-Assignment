@@ -36,7 +36,7 @@ namespace Scripts {
 
         private void UpdateEnergyAmount() {
             
-            _coinAmount.text = _gameModel.Coins.ToString();
+            _energyAmount.text = _gameModel.Energy.ToString();
         }
 
         private void UpdateKeysAmount() {
@@ -47,6 +47,7 @@ namespace Scripts {
         public void Initialize(GameModel gameModel) {
 
             _gameModel = gameModel;
+            UpdateView();
         }
 
     }
