@@ -17,6 +17,7 @@ namespace Scripts {
         
         
         public Action<int> OnBoxClicked;
+        public Action<int, Prize> OnPrizeDisplayed;
 
         public bool AreBoxesClickable {
             get;
@@ -54,7 +55,13 @@ namespace Scripts {
 
             var prizeObject = Instantiate(_prizeView, _prizeContainers[boxId].transform);
             var prizeView = prizeObject.GetComponent<PrizeView>();
-            prizeView.Initialize(prize);
+            prizeView.OnPrizeDisplayed += HandlePrizeDisplayed;
+            prizeView.Initialize(boxId, prize);
+        }
+
+        private void HandlePrizeDisplayed(int boxId, Prize prize) {
+
+            OnPrizeDisplayed?.Invoke(boxId, prize);
         }
 
         private void AnimateBoxOpening(int boxId) {

@@ -41,8 +41,14 @@ namespace Scripts {
 
         private void InitGameView() {
 
-            _gameView.OnBoxClicked += HandleBoxClick;
+            RegisterToGameViewEvents();
             _gameView.Initialize(_gameModel);
+        }
+
+        private void RegisterToGameViewEvents() {
+            
+            _gameView.OnBoxClicked += HandleBoxClick;
+            _gameView.OnPrizeDisplayed += HandlePrizeDisplayed;
         }
 
         private void InitUIView() {
@@ -57,10 +63,53 @@ namespace Scripts {
             _gameView.OpenBox(boxId);
         }
 
-        private void PayKey(int i) {
+        private void HandlePrizeDisplayed(int boxId, Prize prize) {
 
-            _gameModel.Keys--;
+            switch (prize.PrizeType) {
+                
+                case PrizeType.Coins:
+                    _gameModel.Coins += prize.Amount;
+                    break;
+                
+                case PrizeType.Energy:
+                    _gameModel.Energy += prize.Amount;
+                    break;
+                
+                case PrizeType.Keys:
+                    _gameModel.Keys += prize.Amount;
+                    break;
+            }
+            
             _uiView.UpdateView();
+
+            if (_gameModel.Keys <= 0 || AreAllBoxesOpen()) {
+
+                EndGame();
+                return;
+            }
+
+            _gameView.AreBoxesClickable = true;
+        }
+
+        private bool AreAllBoxesOpen() {
+
+            return _gameModel.WereAllPrizesCollected();
+        }
+
+        private void PayKey(int numberOfKeys) {
+
+            _gameModel.Keys-= numberOfKeys;
+            _uiView.UpdateView();
+        }
+
+        private void EndGame() {
+
+            DisplayEndGamePopup();
+        }
+
+        private void DisplayEndGamePopup() {
+            
+            
         }
 
         private void OnDestroy() {

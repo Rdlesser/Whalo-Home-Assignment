@@ -19,6 +19,10 @@ namespace Scripts {
             Prizes = prizes;
         }
 
+        public bool WereAllPrizesCollected() {
+
+            return Prizes.IsNullOrEmpty();
+        }
         
         public Prize GetNextPrize() {
 
