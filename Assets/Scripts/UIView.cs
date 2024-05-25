@@ -14,7 +14,7 @@ namespace Scripts {
         [SerializeField] private TMP_Text _energyAmount;
         [SerializeField] private Image _keyImage;
         [SerializeField] private TMP_Text _keysAmount;
-        [SerializeField] private float _rollUpTime = 2f; 
+        [SerializeField] private float _rollUpTime = 1.2f; 
 
         private GameModel _gameModel;
 
@@ -56,7 +56,7 @@ namespace Scripts {
 
             if (isAnimated) {
                 
-                await StringUtils.RollNumber(_energyAmount, Int32.Parse(_energyAmount.text), _gameModel.Energy, _rollUpTime);
+                await StringUtils.RollNumber(_energyAmount, startAmount, endAmount, _rollUpTime);
             }
             
             _energyAmount.text = StringUtils.NumberToShortString(_gameModel.Energy);
@@ -71,7 +71,7 @@ namespace Scripts {
 
             if (isAnimated) {
                 
-                await StringUtils.RollNumber(_keysAmount, Int32.Parse(_keysAmount.text), _gameModel.Keys, _rollUpTime);
+                await StringUtils.RollNumber(_keysAmount, startAmount, endAmount, _rollUpTime);
             }
             
             _keysAmount.text = StringUtils.NumberToShortString(_gameModel.Keys);
