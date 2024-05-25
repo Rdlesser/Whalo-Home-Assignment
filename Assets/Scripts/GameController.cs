@@ -80,7 +80,7 @@ namespace Scripts {
                     break;
             }
             
-            _uiView.UpdateView();
+            _uiView.UpdateView(true);
 
             if (_gameModel.Keys <= 0 || AreAllBoxesOpen()) {
 
@@ -99,7 +99,7 @@ namespace Scripts {
         private void PayKey(int numberOfKeys) {
 
             _gameModel.Keys-= numberOfKeys;
-            _uiView.UpdateView();
+            _uiView.UpdateView(true);
         }
 
         private void EndGame() {

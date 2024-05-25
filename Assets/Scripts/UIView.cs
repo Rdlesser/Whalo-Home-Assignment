@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +14,7 @@ namespace Scripts {
         [SerializeField] private TMP_Text _energyAmount;
         [SerializeField] private Image _keyImage;
         [SerializeField] private TMP_Text _keysAmount;
+        [SerializeField] private float _rollUpTime = 2f; 
 
         private GameModel _gameModel;
 
@@ -22,25 +25,31 @@ namespace Scripts {
             _keyImage.sprite = Sprite.Create(keyTexture, new Rect(0f, 0f, keyTexture.width, keyTexture.height), Vector2.zero);
         }
 
-        public void UpdateView() {
+        public void UpdateView(bool isAnimated = false) {
 
-            UpdateCoinAmount();
-            UpdateEnergyAmount();
-            UpdateKeysAmount();
+            UpdateCoinAmount(isAnimated);
+            UpdateEnergyAmount(isAnimated);
+            UpdateKeysAmount(isAnimated);
         }
 
-        private void UpdateCoinAmount() {
+        private async void UpdateCoinAmount(bool isAnimated = false) {
 
+            if (isAnimated) {
+                
+                await StringUtils.RollNumber(_coinAmount, Int64.Parse(_coinAmount.text), _gameModel.Coins, _rollUpTime);
+            }
             _coinAmount.text = _gameModel.Coins.ToString();
         }
 
-        private void UpdateEnergyAmount() {
+        private async void UpdateEnergyAmount(bool isAnimated = false) {
             
+            await StringUtils.RollNumber(_energyAmount, Int64.Parse(_energyAmount.text), _gameModel.Energy, _rollUpTime);
             _energyAmount.text = _gameModel.Energy.ToString();
         }
 
-        private void UpdateKeysAmount() {
+        private async void UpdateKeysAmount(bool isAnimated = false) {
 
+            await StringUtils.RollNumber(_keysAmount, Int64.Parse(_keysAmount.text), _gameModel.Keys, _rollUpTime);
             _keysAmount.text = _gameModel.Keys.ToString();
         }
 
