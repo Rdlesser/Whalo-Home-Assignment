@@ -1,10 +1,11 @@
 using System;
 using System.Threading.Tasks;
 #if UNITY_EDITOR
+using DG.DOTweenEditor;
 using Cysharp.Threading.Tasks;
-// using DG.DOTweenEditor;
 #endif
 using DG.Tweening;
+using Scripts;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -91,10 +92,10 @@ namespace Scripts {
             
 #if UNITY_EDITOR
             if (!Application.isPlaying) {
-                // DOTweenEditorPreview.PrepareTweenForPreview(_tweenSequence);
-                // DOTweenEditorPreview.Start();
+                DOTweenEditorPreview.PrepareTweenForPreview(_tweenSequence);
+                DOTweenEditorPreview.Start();
                 var duration = _tweenSequence.Duration();
-                // await UniTask.Delay((1.1f * duration).SecondsToMilliseconds());
+                await UniTask.Delay((int) (1.1f * duration * 1000));
                 Reset();
             }
 #endif
@@ -228,7 +229,8 @@ namespace Scripts {
         public void Reset() {
 
 #if UNITY_EDITOR
-            // DOTweenEditorPreview.Stop(true);
+            
+            DOTweenEditorPreview.Stop(true);
 #endif
             ResetPosition();
             ResetScale();
@@ -294,14 +296,14 @@ public class AToBToolEditor : Editor
         GUILayout.FlexibleSpace();
         if (GUILayout.Button("Preview", GUILayout.Width(100)))
         {
-            // var tar = target as AToBTool;
-            // tar.Play();
+            var tar = target as AToBTool;
+            tar.Play();
         }
 
         if (GUILayout.Button("Reset", GUILayout.Width(100))) {
 
-            // var tar = target as AToBTool;
-            // tar.Reset();
+            var tar = target as AToBTool;
+            tar.Reset();
         }
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
