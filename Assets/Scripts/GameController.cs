@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour {
 
         //TODO: get number of coins/energy/keys from config file
         var prizeQueue = CreatePrizeQueue(_gameConfig.Prizes.PrizeList);
-        _gameModel = new GameModel(_gameConfig.Coins, _gameConfig.Energy, _gameConfig.Keys, prizeQueue);
+        _gameModel = new GameModel(_gameConfig.StartingCoins, _gameConfig.StartingEnergy, _gameConfig.StartingKeys, prizeQueue);
     }
 
     private Queue<Prize> CreatePrizeQueue(List<Prize> prizesScriptablePrizes) {

@@ -50,7 +50,7 @@ namespace DefaultNamespace {
         private void QuitGame() {
 
 #if UNITY_EDITOR
-            EditorApplication.Exit(0);
+            EditorApplication.isPlaying = false;
             return;
 #endif
             Application.Quit();
