@@ -7,11 +7,13 @@ namespace DefaultNamespace {
 
         [SerializeField] private Vector2 _min;
         [SerializeField] private Vector2 _max;
+        [SerializeField] private Vector2 _xRotation;
         [SerializeField] private Vector2 _yRotationRange;
         [SerializeField] private float _lerpSpeed = 0.05f;
         
         private Vector3 _newPosition;
         private Quaternion _newRotation;
+        private float _xRotationSign = 1;
 
         private void Awake() {
 
@@ -36,8 +38,9 @@ namespace DefaultNamespace {
 
             var xPos = Random.Range(_min.x, _max.x);
             var zPos = Random.Range(_min.y, _max.y);
-            _newRotation = Quaternion.Euler(0, Random.Range(_yRotationRange.x, _yRotationRange.y), 0);
-            _newPosition = new Vector3(xPos, 0, zPos);
+     
+            _newRotation = Quaternion.Euler(Random.Range(_xRotation.x, _xRotation.y), Random.Range(_yRotationRange.x, _yRotationRange.y), transform.rotation.z);
+            _newPosition = new Vector3(xPos, transform.position.y, zPos);
         }
 
     }

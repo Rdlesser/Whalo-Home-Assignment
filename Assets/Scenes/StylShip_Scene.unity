@@ -928,7 +928,7 @@ GameObject:
   - component: {fileID: 421018034}
   - component: {fileID: 421018035}
   m_Layer: 5
-  m_Name: PlayButton
+  m_Name: StartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1860,7 +1860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028506123f2d4a7eb34b592202317b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playButton: {fileID: 421018033}
+  _StartGameButton: {fileID: 421018033}
   _eventsButton: {fileID: 1007360537}
   _quitButton: {fileID: 176593614}
 --- !u!1 &948217824
@@ -2055,13 +2055,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.23337625, y: 0.4814922, z: -0.13466218, w: 0.83400655}
-  m_LocalPosition: {x: -40, y: 25, z: 0.5}
+  m_LocalRotation: {x: 0.2109786, y: 0.51277804, z: -0.122079484, w: 0.823191}
+  m_LocalPosition: {x: -52.2, y: 30.95, z: 12.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 31.262, y: 60, z: 0.008}
+  m_LocalEulerAnglesHint: {x: 28.2, y: 64.09, z: 1}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2074,10 +2074,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e44fc119df948a7a842725bcb35cecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _min: {x: -5, y: -5}
-  _max: {x: 5, y: 5}
-  _yRotationRange: {x: -2, y: 2}
-  _lerpSpeed: 0.005
+  _min: {x: -47, y: -5.5}
+  _max: {x: -44, y: 5.86}
+  _xRotation: {x: 27.5, y: 28.2}
+  _yRotationRange: {x: 48, y: 65}
+  _lerpSpeed: 0.02
 --- !u!1 &1007360533
 GameObject:
   m_ObjectHideFlags: 0
@@ -3142,7 +3143,7 @@ Light:
   m_GameObject: {fileID: 2066713306}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 2
+  m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.94540155, b: 0, a: 1}
   m_Intensity: 1.2
