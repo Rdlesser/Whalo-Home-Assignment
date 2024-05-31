@@ -13,11 +13,7 @@ namespace Scripts {
         public Semaphore(int initialCount) {
             _semaphore = new SemaphoreSlim(initialCount);
         }
-
-        /// <summary>
-        /// wait until the semaphore is released
-        /// </summary>
-        /// <returns></returns>
+        
         public async Task WaitAsync(CancellationToken c = default) {
             ++Awaiters;
             await _semaphore.WaitAsync(c);
@@ -26,26 +22,16 @@ namespace Scripts {
             }
         }
 
-        /// <summary>
-        /// releases X awaiters
-        /// </summary>
-        /// <param name="count"></param>
         public void Release(int count) {
             Awaiters -= count;
             _semaphore.Release(count);
         }
         
-        /// <summary>
-        /// release a single awaiter
-        /// </summary>
         public void Release() {
             --Awaiters;
             _semaphore.Release(1);
         }
-
-        /// <summary>
-        /// release all awaiters
-        /// </summary>
+        
         public void ReleaseAll() {
             var count = Awaiters;
             Awaiters = 0;
@@ -59,9 +45,6 @@ namespace Scripts {
             ReleaseAll();
         }
 
-        /// <summary>
-        /// disposes of the semaphore
-        /// </summary>
         public void Dispose() {
             _semaphore.Dispose();
             _semaphore = null;

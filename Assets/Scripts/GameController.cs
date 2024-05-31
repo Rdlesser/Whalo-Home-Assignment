@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using DefaultNamespace;
 using Scripts;
 using UnityEngine;
 
-public class GameController : MonoBehaviour {
+public class GameController : Controller{
 
     [SerializeField] private GameView _gameView;
     [SerializeField] private UIView _uiView;
@@ -12,19 +15,21 @@ public class GameController : MonoBehaviour {
         
     private ServiceReceiver<IAssetService> _assetService = new();
 
-    private void Start() {
+    protected override UniTask Initialize() {
 
         InitGameModel();
         InitGameView();
         InitUIView();
-        // InitUISprites();
-        // InitPrizeQueue();
-        // RegisterToBoxViewEvents();
+
+        return UniTask.CompletedTask;
     }
 
+    protected override void Clean() {
+        
+    }
+    
     private void InitGameModel() {
-
-        //TODO: get number of coins/energy/keys from config file
+        
         var prizeQueue = CreatePrizeQueue(_gameConfig.Prizes.PrizeList);
         _gameModel = new GameModel(_gameConfig.StartingCoins, _gameConfig.StartingEnergy, _gameConfig.StartingKeys, prizeQueue);
     }

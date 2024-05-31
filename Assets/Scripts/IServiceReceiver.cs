@@ -1,8 +1,11 @@
-﻿namespace Scripts {
+﻿using System;
 
-    public class IServiceReceiver {
+namespace Scripts {
 
-        
+    public interface IServiceReceiver {
+
+        public Type InjectedType { get; }
+        public void Inject(object service);
 
     }
 

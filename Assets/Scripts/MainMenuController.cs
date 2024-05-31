@@ -1,19 +1,32 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using Scripts;
 using UnityEditor;
 using UnityEngine;
 
 namespace DefaultNamespace {
 
-    public class MainMenuController : MonoBehaviour{
+    public class MainMenuController : Controller{
 
         [SerializeField] private MainMenuView _mainMenuView;
         
+        private ServiceConfiguration _serviceConfiguration;
         private ServiceReceiver<ISceneService> _sceneService = new();
 
-        private void Start() {
-
+        protected override async UniTask Initialize() {
+            
             _mainMenuView.OnMenuOptionClicked += HandleMenuOptionClick;
+            await InitializeApp();
+        }
+
+        protected override void Clean() {
+            
+        }
+
+        private async UniTask InitializeApp() {
+            
+            _serviceConfiguration = new ServiceConfiguration();
+            await _serviceConfiguration.Initialize();
         }
 
         private void HandleMenuOptionClick(MenuOption menuOption) {

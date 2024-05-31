@@ -2410,6 +2410,7 @@ GameObject:
   - component: {fileID: 8670584267526027221}
   - component: {fileID: 8670584267526027222}
   - component: {fileID: 8670584267526027223}
+  - component: {fileID: 8670584267526027224}
   m_Layer: 10
   m_Name: Camera
   m_TagString: Untagged
@@ -4793,6 +4794,23 @@ MonoBehaviour:
   - {fileID: 1187184274}
   _prizeView: {fileID: 8837801263959108643, guid: bee502600cfa94487a55afa21e5d1056, type: 3}
   _smokeParticles: {fileID: 2099287801}
+--- !u!114 &8670584267526027224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450185105550431117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e44fc119df948a7a842725bcb35cecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _min: {x: -10, y: 0}
+  _max: {x: 10, y: 0}
+  _xRotation: {x: 0, y: 0}
+  _yRotationRange: {x: 0, y: 0}
+  _lerpSpeed: 0.05
 --- !u!224 &8713984028622220480
 RectTransform:
   m_ObjectHideFlags: 0
