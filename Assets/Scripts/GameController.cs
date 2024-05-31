@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using DefaultNamespace;
 using Scripts;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class GameController : Controller{
 
@@ -54,9 +56,27 @@ public class GameController : Controller{
         _gameView.OnPrizeDisplayed += HandlePrizeDisplayed;
     }
 
-    private void InitUIView() {
+    private async UniTask InitUIView() {
 
         _uiView.Initialize(_gameModel);
+        // TODO: Move this to the asset service
+        var coinSprite = await GetSprite("https://drive.usercontent.google.com/u/0/uc?id=1STe0U77LPpDHry2E-TrLwnvNxC1xY9f4&export=download");
+        var energySprite = await GetSprite("https://drive.usercontent.google.com/u/0/uc?id=1Lhcot4Wfho1SGtYrobmp1MrZ_YeJwApc&export=download");
+        var keySprite = await GetSprite("https://drive.usercontent.google.com/u/0/uc?id=1pLjE-n69_A_1mfJG_ZJtmzCsl6OvPRIU&export=download");
+        _uiView.SetIcons(coinSprite, energySprite, keySprite);
+    }
+
+    private async UniTask<Texture2D> GetSprite(string url) {
+
+        var webRequest = UnityWebRequestTexture.GetTexture(url);
+        await webRequest.SendWebRequest().WithCancellation(this.GetCancellationTokenOnDestroy());
+        // var webRequest = await UnityWebRequestTexture.GetTexture(url).SendWebRequest().
+        //     WithCancellation(this.GetCancellationTokenOnDestroy());
+
+
+        var texture = ((DownloadHandlerTexture) webRequest.downloadHandler).texture;
+
+        return texture;
     }
 
     private void HandleBoxClick(int boxId) {
