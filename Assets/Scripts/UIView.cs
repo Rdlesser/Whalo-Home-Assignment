@@ -14,7 +14,9 @@ namespace Scripts {
         [SerializeField] private TMP_Text _energyAmount;
         [SerializeField] private Image _keyImage;
         [SerializeField] private TMP_Text _keysAmount;
-        [SerializeField] private float _rollUpTime = 1.2f; 
+        [SerializeField] private float _coinsRollupTime = 1.2f;
+        [SerializeField] private float _energyRollupTime = 1f;
+        [SerializeField] private float _keyRollupTime = 0.5f; 
 
         private GameModel _gameModel;
 
@@ -41,7 +43,7 @@ namespace Scripts {
 
             if (isAnimated) {
                 
-                await StringUtils.RollNumber(_coinAmount, startAmount, endAmount, _rollUpTime);
+                await StringUtils.RollNumber(_coinAmount, startAmount, endAmount, _coinsRollupTime);
             }
             
             _coinAmount.text = StringUtils.NumberToShortString(_gameModel.Coins);
@@ -56,7 +58,7 @@ namespace Scripts {
 
             if (isAnimated) {
                 
-                await StringUtils.RollNumber(_energyAmount, startAmount, endAmount, _rollUpTime);
+                await StringUtils.RollNumber(_energyAmount, startAmount, endAmount, _energyRollupTime);
             }
             
             _energyAmount.text = StringUtils.NumberToShortString(_gameModel.Energy);
@@ -70,8 +72,8 @@ namespace Scripts {
         public async void UpdateKeysAmount(int startAmount, int endAmount, bool isAnimated = false) {
 
             if (isAnimated) {
-                
-                await StringUtils.RollNumber(_keysAmount, startAmount, endAmount, _rollUpTime);
+
+                await StringUtils.RollNumber(_keysAmount, startAmount, endAmount, _keyRollupTime);
             }
             
             _keysAmount.text = StringUtils.NumberToShortString(_gameModel.Keys);

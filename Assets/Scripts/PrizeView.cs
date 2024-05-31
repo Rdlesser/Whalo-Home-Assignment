@@ -9,7 +9,7 @@ namespace Scripts {
 
         [SerializeField] private Image _prizeImage;
         [SerializeField] private TMP_Text _prizeAmount;
-        [SerializeField] private Animator _prizeAnimator;
+        [SerializeField] private AToBTool _prizeAnimator;
 
         private Prize _prize;
         private int _boxId;
@@ -26,19 +26,21 @@ namespace Scripts {
             _prizeAmount.text = prizeAmount.ToString();
         }
 
-        public void Initialize(int boxId, Prize prize) {
+        public void Initialize(int boxId, Prize prize, Transform startPosition, Transform endPosition) {
 
             _prize = prize;
             _boxId = boxId;
             InitializeVisuals(_prize.Sprite, _prize.Amount);
-            _finishState = _prizeAnimator.GetBehaviour<FinishState>();
-            _finishState.OnEnter += PrizeDisplayed;
-            _prizeAnimator.SetTrigger(In);
+            _prizeAnimator.OnMoveComplete += PrizeDisplayed;
+            // _finishState = _prizeAnimator.GetBehaviour<FinishState>();
+            // _finishState.OnEnter += PrizeDisplayed;
+            _prizeAnimator.ConfigureStartAndEndPosition(startPosition, endPosition);
+            _prizeAnimator.Play();
         }
 
         private void PrizeDisplayed() {
 
-            _finishState.OnEnter -= PrizeDisplayed;
+            _prizeAnimator.OnMoveComplete -= PrizeDisplayed;
             OnPrizeDisplayed?.Invoke(_boxId, _prize);
         }
 

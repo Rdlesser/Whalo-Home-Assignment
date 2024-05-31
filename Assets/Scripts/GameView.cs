@@ -12,6 +12,9 @@ namespace Scripts {
         [SerializeField] private List<BoxView> _boxViews;
         [SerializeField] private GameObject _prizeView;
         [SerializeField] private ParticleSystem _smokeParticles;
+        [SerializeField] private Transform _coinIcon;
+        [SerializeField] private Transform _energyIcon;
+        [SerializeField] private Transform _keyIcon;
 
         private GameModel _gameModel;
         
@@ -53,10 +56,33 @@ namespace Scripts {
 
         private void SetBoxPrize(int boxId, Prize prize) {
 
-            var prizeObject = Instantiate(_prizeView, _prizeContainers[boxId].transform);
+            var prizeContainerTransform = _prizeContainers[boxId].transform;
+            var prizeObject = Instantiate(_prizeView, prizeContainerTransform);
             var prizeView = prizeObject.GetComponent<PrizeView>();
             prizeView.OnPrizeDisplayed += HandlePrizeDisplayed;
-            prizeView.Initialize(boxId, prize);
+            prizeView.Initialize(boxId, prize, prizeContainerTransform, GetIconPosition(prize.PrizeType));
+        }
+
+        private Transform GetIconPosition(PrizeType prize) {
+
+            switch (prize) {
+
+
+                case PrizeType.Keys:
+                    return _keyIcon;
+                    break;
+
+                case PrizeType.Coins:
+                    return _coinIcon;
+                    break;
+
+                case PrizeType.Energy:
+                    return _energyIcon;
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(prize), prize, null);
+            }
         }
 
         private void HandlePrizeDisplayed(int boxId, Prize prize) {

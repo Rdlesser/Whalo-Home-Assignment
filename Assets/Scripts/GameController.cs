@@ -13,7 +13,7 @@ public class GameController : Controller{
 
     private GameModel _gameModel;
         
-    private ServiceReceiver<IAssetService> _assetService = new();
+    // private ServiceReceiver<IAssetService> _assetService = new();
 
     protected override UniTask Initialize() {
 

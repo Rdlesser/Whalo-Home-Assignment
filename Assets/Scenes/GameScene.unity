@@ -2410,7 +2410,6 @@ GameObject:
   - component: {fileID: 8670584267526027221}
   - component: {fileID: 8670584267526027222}
   - component: {fileID: 8670584267526027223}
-  - component: {fileID: 8670584267526027224}
   m_Layer: 10
   m_Name: Camera
   m_TagString: Untagged
@@ -4794,23 +4793,9 @@ MonoBehaviour:
   - {fileID: 1187184274}
   _prizeView: {fileID: 8837801263959108643, guid: bee502600cfa94487a55afa21e5d1056, type: 3}
   _smokeParticles: {fileID: 2099287801}
---- !u!114 &8670584267526027224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450185105550431117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e44fc119df948a7a842725bcb35cecd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _min: {x: -10, y: 0}
-  _max: {x: 10, y: 0}
-  _xRotation: {x: 0, y: 0}
-  _yRotationRange: {x: 0, y: 0}
-  _lerpSpeed: 0.05
+  _coinIcon: {fileID: 1024552038}
+  _energyIcon: {fileID: 2146084653}
+  _keyIcon: {fileID: 5020917880166629531}
 --- !u!224 &8713984028622220480
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4823,11 +4808,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 829144566}
+  - {fileID: 1277421595}
+  - {fileID: 1822527208763769202}
   - {fileID: 4579050383072683762}
   - {fileID: 3726939175679320353}
-  - {fileID: 1822527208763769202}
-  - {fileID: 1277421595}
-  - {fileID: 829144566}
   m_Father: {fileID: 7059294247649632273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4853,7 +4838,9 @@ MonoBehaviour:
   _energyAmount: {fileID: 198713658}
   _keyImage: {fileID: 2415515767670995433}
   _keysAmount: {fileID: 646854214}
-  _rollUpTime: 2
+  _coinsRollupTime: 1.2
+  _energyRollupTime: 1
+  _keyRollupTime: 0.6
 --- !u!222 &8760837944707928683
 CanvasRenderer:
   m_ObjectHideFlags: 0

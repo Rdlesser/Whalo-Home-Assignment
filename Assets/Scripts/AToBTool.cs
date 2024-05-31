@@ -60,18 +60,18 @@ public class AToBTool : MonoBehaviour {
         }
     }
 
+    public void ConfigureStartAndEndPosition(Transform start, Transform end) {
+
+        _startPosition = start;
+        _endPosition = end;
+    }
+
     [ContextMenu("Play")]
     public async Task Play() {
 
         CacheOriginalValues();
         HandleSequenceReset();
         _tweenSequence = DOTween.Sequence().SetTarget(transform);
-
-        if(!IsPreconditionAvailable()) {
-
-            Debug.LogError("A to B script must have a start and end position");
-            return;
-        }
 
         var targetPosition = _endPosition.position;
 
