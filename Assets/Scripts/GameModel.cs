@@ -8,6 +8,9 @@ namespace Scripts {
         public int Energy;
         public int Keys;
 
+        public long AccumulatedCoins;
+        public int AccumulatedEnergy;
+
         private Queue<Prize> Prizes;
 
         public GameModel(long coins, int energy, int keys, Queue<Prize> prizes) {

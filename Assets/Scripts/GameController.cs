@@ -28,6 +28,7 @@ public class GameController : Controller{
 
     protected override void Clean() {
         
+        DeregisterGameViewEvents();
     }
     
     private void InitGameModel() {
@@ -56,6 +57,12 @@ public class GameController : Controller{
         _gameView.OnPrizeDisplayed += HandlePrizeDisplayed;
     }
 
+    private void DeregisterGameViewEvents() {
+        
+        _gameView.OnBoxClicked -= HandleBoxClick;
+        _gameView.OnPrizeDisplayed -= HandlePrizeDisplayed;
+    }
+
     private async UniTask InitUIView() {
 
         _uiView.Initialize(_gameModel);
@@ -70,9 +77,6 @@ public class GameController : Controller{
 
         var webRequest = UnityWebRequestTexture.GetTexture(url);
         await webRequest.SendWebRequest().WithCancellation(this.GetCancellationTokenOnDestroy());
-        // var webRequest = await UnityWebRequestTexture.GetTexture(url).SendWebRequest().
-        //     WithCancellation(this.GetCancellationTokenOnDestroy());
-
 
         var texture = ((DownloadHandlerTexture) webRequest.downloadHandler).texture;
 
@@ -81,7 +85,7 @@ public class GameController : Controller{
 
     private void HandleBoxClick(int boxId) {
 
-        PayKey(1);
+        PayKey(_gameConfig.BoxOpeningPrice);
         _gameView.AreBoxesClickable = false;
         _gameView.OpenBox(boxId);
     }
@@ -92,11 +96,13 @@ public class GameController : Controller{
                 
             case PrizeType.Coins:
                 _gameModel.Coins += prize.Amount;
+                _gameModel.AccumulatedCoins += prize.Amount;
                 _uiView.UpdateCoinAmount(_gameModel.Coins - prize.Amount, _gameModel.Coins, true);
                 break;
                 
             case PrizeType.Energy:
                 _gameModel.Energy += prize.Amount;
+                _gameModel.AccumulatedEnergy += prize.Amount;
                 _uiView.UpdateEnergyAmount(_gameModel.Energy - prize.Amount, _gameModel.Energy, true);
                 break;
                 
@@ -104,6 +110,9 @@ public class GameController : Controller{
                 _gameModel.Keys += prize.Amount;
                 _uiView.UpdateKeysAmount(_gameModel.Keys - prize.Amount, _gameModel.Keys, true);
                 break;
+
+            default:
+                throw new ArgumentOutOfRangeException();
         }
 
         if (_gameModel.Keys <= 0 || AreAllBoxesOpen()) {
@@ -133,7 +142,7 @@ public class GameController : Controller{
 
     private void DisplayEndGamePopup() {
             
-            
+        
     }
 
     private void OnDestroy() {
