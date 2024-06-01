@@ -8,11 +8,11 @@ namespace DefaultNamespace {
 
     public class ServiceConfiguration {
 
-        public const string ConfigurationFolderName = "ServiceConfigs";
+        private const string CONFIGURATION_FOLDER_NAME = "ServiceConfigs";
         Dictionary<string, string> _servicesConfiguration;
         
         public ServiceConfiguration() {
-            var allConfigs = Resources.LoadAll<TextAsset>(ConfigurationFolderName);
+            var allConfigs = Resources.LoadAll<TextAsset>(CONFIGURATION_FOLDER_NAME);
             _servicesConfiguration = new Dictionary<string, string>();
             foreach(var config in allConfigs) {
                 _servicesConfiguration.Add(config.name, config.text);
@@ -25,7 +25,8 @@ namespace DefaultNamespace {
 
             {
                 Register<ISceneService, SceneService>(),
-                Register<IAssetService, AssetService>()
+                Register<IAssetService, AssetService>(),
+                Register<IPopupService, PopupService>()
             });
             
         }
