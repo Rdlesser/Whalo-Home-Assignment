@@ -15,6 +15,7 @@ namespace Scripts {
 
         public override void Clean() {
             
+            
         }
 
         public void MoveToScene(SceneName scene) {

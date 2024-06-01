@@ -1,143 +1,144 @@
 ﻿using System;
 using System.Collections.Generic;
+using Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts {
+public class GameView : MonoBehaviour{
 
-    public class GameView : MonoBehaviour{
+    [SerializeField] private List<Button> _boxButtons;
+    [SerializeField] private List<GameObject> _prizeContainers;
+    [SerializeField] private List<BoxView> _boxViews;
+    [SerializeField] private GameObject _prizeView;
+    [SerializeField] private ParticleSystem _smokeParticles;
+    [SerializeField] private Transform _coinIcon;
+    [SerializeField] private Transform _energyIcon;
+    [SerializeField] private Transform _keyIcon;
 
-        [SerializeField] private List<Button> _boxButtons;
-        [SerializeField] private List<GameObject> _prizeContainers;
-        [SerializeField] private List<BoxView> _boxViews;
-        [SerializeField] private GameObject _prizeView;
-        [SerializeField] private ParticleSystem _smokeParticles;
-        [SerializeField] private Transform _coinIcon;
-        [SerializeField] private Transform _energyIcon;
-        [SerializeField] private Transform _keyIcon;
-
-        private GameModel _gameModel;
+    private GameModel _gameModel;
         
         
-        public Action<int> OnBoxClicked;
-        public Action<int, Prize> OnPrizeDisplayed;
+    public Action<int> OnBoxClicked;
+    public Action<int, Prize> OnPrizeDisplayed;
 
-        public bool AreBoxesClickable {
-            get;
-            set;
+    public bool AreBoxesClickable {
+        get;
+        set;
+    }
+
+    public void Initialize(GameModel gameModel) {
+
+        _gameModel = gameModel;
+        for (int i = 0; i < _boxButtons.Count; i++) {
+
+            var boxId = i;
+            _boxButtons[i].onClick.AddListener(() => ReactToBoxClick(boxId));
         }
 
-        public void Initialize(GameModel gameModel) {
+        AreBoxesClickable = true;
+    }
 
-            _gameModel = gameModel;
-            for (int i = 0; i < _boxButtons.Count; i++) {
+    private void ReactToBoxClick(int boxId) {
 
-                var boxId = i;
-                _boxButtons[i].onClick.AddListener(() => ReactToBoxClick(boxId));
-            }
-
-            AreBoxesClickable = true;
+        if (!AreBoxesClickable) {
+            return;
         }
-
-        private void ReactToBoxClick(int boxId) {
-
-            if (!AreBoxesClickable) {
-                return;
-            }
             
-            _boxButtons[boxId].onClick.RemoveAllListeners();
-            OnBoxClicked?.Invoke(boxId);
-        }
+        _boxButtons[boxId].onClick.RemoveAllListeners();
+        OnBoxClicked?.Invoke(boxId);
+    }
 
-        public void OpenBox(int boxId) {
+    public void OpenBox(int boxId) {
             
-            AnimateBoxOpening(boxId);
-        }
+        AnimateBoxOpening(boxId);
+    }
 
-        private void SetBoxPrize(int boxId, Prize prize, bool isCollectable) {
+    private void SetBoxPrize(int boxId, Prize prize, bool isCollectable) {
 
-            var prizeContainerTransform = _prizeContainers[boxId].transform;
-            var prizeObject = Instantiate(_prizeView, prizeContainerTransform);
-            var prizeView = prizeObject.GetComponent<PrizeView>();
-            prizeView.OnPrizeDisplayed += HandlePrizeDisplayed;
-            prizeView.Initialize(boxId, prize, prizeContainerTransform, GetIconPosition(prize.PrizeType));
+        var prizeContainerTransform = _prizeContainers[boxId].transform;
+        var prizeObject = Instantiate(_prizeView, prizeContainerTransform);
+        var prizeView = prizeObject.GetComponent<PrizeView>();
+        prizeView.OnPrizeDisplayed += HandlePrizeDisplayed;
+        prizeView.Initialize(boxId, prize, prizeContainerTransform, GetIconPosition(prize.PrizeType));
 
-            if (isCollectable) {
+        if (isCollectable) {
                 
-                prizeView.PlayCollectAnimation();
-            }
+            prizeView.PlayCollectAnimation();
+        }
 
-            else {
+        else {
                 
-                prizeView.DimPrize();
-            }
+            prizeView.DimPrize();
         }
+    }
 
-        private Transform GetIconPosition(PrizeType prize) {
+    private Transform GetIconPosition(PrizeType prize) {
 
-            switch (prize) {
+        switch (prize) {
 
 
-                case PrizeType.Keys:
-                    return _keyIcon;
+            case PrizeType.Keys:
+                return _keyIcon;
 
-                case PrizeType.Coins:
-                    return _coinIcon;
+            case PrizeType.Coins:
+                return _coinIcon;
 
-                case PrizeType.Energy:
-                    return _energyIcon;
+            case PrizeType.Energy:
+                return _energyIcon;
 
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(prize), prize, null);
-            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(prize), prize, null);
         }
+    }
 
-        private void HandlePrizeDisplayed(int boxId, Prize prize) {
+    private void HandlePrizeDisplayed(int boxId, Prize prize) {
 
-            OnPrizeDisplayed?.Invoke(boxId, prize);
-        }
+        OnPrizeDisplayed?.Invoke(boxId, prize);
+    }
 
-        private void AnimateBoxOpening(int boxId, bool isCollectable = true) {
+    private void AnimateBoxOpening(int boxId, bool isCollectable = true) {
 
-            var boxView = _boxViews[boxId];
-            boxView.OnLidRemoved += () => AnimateSmokePoof(boxId, isCollectable);
-            _boxViews[boxId].AnimateLidRemoval();
-        }
+        var boxView = _boxViews[boxId];
+        boxView.OnLidRemoved += () => AnimateSmokePoof(boxId, isCollectable);
+        _boxViews[boxId].AnimateLidRemoval();
+    }
 
-        private void AnimateSmokePoof(int boxId, bool isCollectable) {
+    private void AnimateSmokePoof(int boxId, bool isCollectable) {
             
-            var boxView = _boxViews[boxId];
-            boxView.OnLidRemoved = null;
-            _gameModel.TryGetNextPrize(out var prize);
-            SetBoxPrize(boxId, prize, isCollectable);
+        var boxView = _boxViews[boxId];
+        boxView.OnLidRemoved = null;
+        _gameModel.TryGetNextPrize(out var prize);
+        SetBoxPrize(boxId, prize, isCollectable);
+
+        if (isCollectable) {
+                
             SetSmokeParticles(boxId);
         }
+    }
 
-        private void SetSmokeParticles(int boxId) {
+    private void SetSmokeParticles(int boxId) {
 
-            _smokeParticles.transform.position = _prizeContainers[boxId].transform.position;
-            _smokeParticles.Stop();
-            _smokeParticles.Play();
-        }
+        _smokeParticles.transform.position = _prizeContainers[boxId].transform.position;
+        _smokeParticles.Stop();
+        _smokeParticles.Play();
+    }
 
-        private void OnDestroy() {
+    private void OnDestroy() {
 
-            foreach (var boxButton in _boxButtons) {
+        foreach (var boxButton in _boxButtons) {
                 
-                boxButton.onClick.RemoveAllListeners();
-            }
+            boxButton.onClick.RemoveAllListeners();
         }
+    }
 
-        public void RevealAllPrizes() {
+    public void RevealAllPrizes() {
 
-            var closedBoxes = _gameModel.GetClosedBoxes();
+        var closedBoxes = _gameModel.GetClosedBoxes();
 
-            foreach (var boxId in closedBoxes) {
+        foreach (var boxId in closedBoxes) {
 
-                AnimateBoxOpening(boxId, false);
-            }
+            AnimateBoxOpening(boxId, false);
         }
-
     }
 
 }
