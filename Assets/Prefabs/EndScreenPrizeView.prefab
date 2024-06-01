@@ -110,7 +110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8724553968152433184, guid: bee502600cfa94487a55afa21e5d1056, type: 3}
       propertyPath: _playOnEnable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8724553968152433184, guid: bee502600cfa94487a55afa21e5d1056, type: 3}
       propertyPath: _isPositionAnimated

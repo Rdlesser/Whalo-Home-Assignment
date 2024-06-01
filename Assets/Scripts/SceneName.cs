@@ -2,8 +2,9 @@
 
     public enum SceneName {
 
-        MainMenu = 0,
-        Game = 1
+        Loading = 0,
+        MainMenu = 1,
+        Game = 2
     }
 
 }

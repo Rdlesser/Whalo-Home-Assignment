@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using DefaultNamespace;
 using Scripts;
@@ -12,6 +11,7 @@ public class GameController : Controller{
     [SerializeField] private GameView _gameView;
     [SerializeField] private UIView _uiView;
     [SerializeField] private GameConfig _gameConfig;
+    [SerializeField] private GameObject _endScreenPanel;
     [SerializeField] private EndScreenView _endScreenView;
 
     private GameModel _gameModel;
@@ -19,7 +19,8 @@ public class GameController : Controller{
     private Texture2D _coinTexture;
     private Texture2D _energyTexture;
     private Texture2D _keyTexture;
-        
+
+    private ServiceReceiver<ISceneService> _sceneService = new();
     // private ServiceReceiver<IAssetService> _assetService = new();
 
     protected override UniTask Initialize() {
@@ -143,16 +144,25 @@ public class GameController : Controller{
 
     private async void EndGame() {
 
+        _gameView.AreBoxesClickable = false;
+        DeregisterGameViewEvents();
         await _gameView.RevealAllPrizes();
         DisplayEndGamePopup();
     }
 
     private void DisplayEndGamePopup() {
 
-        _endScreenView.gameObject.SetActive(true);
+        _endScreenPanel.SetActive(true);
         var coinSprite = Sprite.Create(_coinTexture,  new Rect(0f, 0f, _coinTexture.width, _coinTexture.height), Vector2.zero);
         var energySprite = Sprite.Create(_energyTexture,  new Rect(0f, 0f, _energyTexture.width, _energyTexture.height), Vector2.zero);
+        _endScreenView.OnCollectClicked += HandleCollectClicked;
         _endScreenView.Initialize(coinSprite, _gameModel.AccumulatedCoins, energySprite, _gameModel.AccumulatedEnergy);
+    }
+
+    private void HandleCollectClicked() {
+
+        _endScreenView.OnCollectClicked -= HandleCollectClicked;
+        _sceneService.Get().MoveToScene(SceneName.MainMenu);
     }
 
     private void OnDestroy() {

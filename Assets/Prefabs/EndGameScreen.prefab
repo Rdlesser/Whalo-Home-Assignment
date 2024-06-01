@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 5259147599040660934}
   - component: {fileID: 6757745024277729376}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: EndGameScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,7 +222,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2479800027128131131}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.254902, g: 0.5036291, b: 1, a: 0.42352942}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.63529414}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -338,6 +338,11 @@ MonoBehaviour:
   _energyPrizeContainer: {fileID: 5541650341501822808}
   _coinPrizeView: {fileID: 8862073446100091084}
   _energyPrizeView: {fileID: 1074870685041202815}
+  _animator: {fileID: 5259147599040660934}
+  _headerAnimator: {fileID: 6102290150760027947}
+  _coinPrizeAnimator: {fileID: 5791554439998477505}
+  _energyPrizeAnimator: {fileID: 2614728801746764402}
+  _collectButton: {fileID: 2540373437172855952}
 --- !u!1 &4670147387988044651
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,15 +371,15 @@ RectTransform:
   m_GameObject: {fileID: 4670147387988044651}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5242036066990457504}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1965073.4}
-  m_SizeDelta: {x: -524.72, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -517.83, y: -197.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8106088774102008861
 CanvasRenderer:
@@ -431,7 +436,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 270.5
+  m_fontSize: 271.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -485,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97488ad03ec6de7469b55bad4b3177c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playOnEnable: 1
+  _playOnEnable: 0
   _animationTime: 2
   _delay: 0
   _isPositionAnimated: 0
@@ -947,7 +952,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 478599320567294975, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_Name
-      value: EndScreenPrizeView
+      value: EnergyPrizeView
       objectReference: {fileID: 0}
     - target: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_Pivot.x
@@ -983,11 +988,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.14159429
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.14159429
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_LocalScale.z
@@ -1023,11 +1028,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -397.77747
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1060,6 +1065,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05c754e9aa5f4c08ac4563494292cecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2614728801746764402 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 365259398703781372, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
+  m_PrefabInstance: {fileID: 2402890857620821902}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97488ad03ec6de7469b55bad4b3177c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2829782168483786079
@@ -1164,6 +1180,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2585848479314714934, guid: 1ff12e4bda915ce49bb361d12ed675a4, type: 3}
   m_PrefabInstance: {fileID: 2829782168483786079}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2540373437172855952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 289461613616126415, guid: 1ff12e4bda915ce49bb361d12ed675a4, type: 3}
+  m_PrefabInstance: {fileID: 2829782168483786079}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6146874081652146493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1174,7 +1201,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 478599320567294975, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_Name
-      value: EndScreenPrizeView
+      value: CoinPrizeView
       objectReference: {fileID: 0}
     - target: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_Pivot.x
@@ -1210,11 +1237,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.45808738
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.45808738
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_LocalScale.z
@@ -1254,7 +1281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1273,6 +1300,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
+--- !u!114 &5791554439998477505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 365259398703781372, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}
+  m_PrefabInstance: {fileID: 6146874081652146493}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97488ad03ec6de7469b55bad4b3177c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8513535864860761940 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2551344902356885097, guid: 170a3c35aa51c5d4a95e7f32c2498219, type: 3}

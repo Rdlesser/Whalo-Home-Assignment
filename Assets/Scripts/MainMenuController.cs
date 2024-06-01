@@ -10,25 +10,18 @@ namespace DefaultNamespace {
 
         [SerializeField] private MainMenuView _mainMenuView;
         
-        private ServiceConfiguration _serviceConfiguration;
         private ServiceReceiver<ISceneService> _sceneService = new();
 
         protected override async UniTask Initialize() {
             
             _mainMenuView.OnMenuOptionClicked += HandleMenuOptionClick;
-            await InitializeApp();
         }
 
         protected override void Clean() {
             
+            _mainMenuView.OnMenuOptionClicked -= HandleMenuOptionClick;
         }
-
-        private async UniTask InitializeApp() {
-            
-            _serviceConfiguration = new ServiceConfiguration();
-            await _serviceConfiguration.Initialize();
-        }
-
+        
         private void HandleMenuOptionClick(MenuOption menuOption) {
 
             switch (menuOption) {

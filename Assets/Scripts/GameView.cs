@@ -94,13 +94,13 @@ public class GameView : MonoBehaviour{
     }
 
     private void HandlePrizeDisplayed(int boxId, Prize prize) {
-
+        
         _isOpeningBox = false;
         OnPrizeDisplayed?.Invoke(boxId, prize);
     }
 
     private void AnimateBoxOpening(int boxId, bool isCollectable = true) {
-
+        
         _isOpeningBox = true;
         var boxView = _boxViews[boxId];
         boxView.OnLidRemoved += () => AnimateSmokePoof(boxId, isCollectable);
@@ -108,7 +108,7 @@ public class GameView : MonoBehaviour{
     }
 
     private void AnimateSmokePoof(int boxId, bool isCollectable) {
-            
+        
         var boxView = _boxViews[boxId];
         boxView.OnLidRemoved = null;
         _gameModel.TryGetNextPrize(out var prize);
@@ -140,11 +140,9 @@ public class GameView : MonoBehaviour{
         var closedBoxes = _gameModel.GetClosedBoxes();
 
         foreach (var boxId in closedBoxes) {
-
+            
             AnimateBoxOpening(boxId, false);
-            Debug.LogError("Waiting for box opening");
             await UniTask.WaitUntil(() => !_isOpeningBox);
-            Debug.LogError("Waiting Complete");
         }
     }
 
