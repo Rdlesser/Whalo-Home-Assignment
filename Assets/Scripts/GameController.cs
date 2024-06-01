@@ -21,7 +21,11 @@ public class GameController : Controller{
     private Texture2D _keyTexture;
 
     private ServiceReceiver<ISceneService> _sceneService = new();
-    // private ServiceReceiver<IAssetService> _assetService = new();
+    private ServiceReceiver<IAssetService> _assetService = new();
+
+    private const string COIN_STRING = "Coin";
+    private const string ENERGY_STRING = "Energy";
+    private const string KEY_STRING = "Key";
 
     protected override UniTask Initialize() {
 
@@ -46,6 +50,12 @@ public class GameController : Controller{
     private Queue<Prize> CreatePrizeQueue(List<Prize> prizesScriptablePrizes) {
 
         var prizes = new List<Prize>(prizesScriptablePrizes);
+
+        foreach (var prize in prizes) {
+
+            prize.Texture = _assetService.Get().GetAsset(prize.SpriteName);
+        }
+        
         prizes.Shuffle();
 
         return new Queue<Prize>(prizes);
@@ -72,10 +82,9 @@ public class GameController : Controller{
     private async UniTask InitUIView() {
 
         _uiView.Initialize(_gameModel);
-        // TODO: Move this to the asset service
-        _coinTexture = await GetSprite("https://drive.usercontent.google.com/u/0/uc?id=1STe0U77LPpDHry2E-TrLwnvNxC1xY9f4&export=download");
-        _energyTexture = await GetSprite("https://drive.usercontent.google.com/u/0/uc?id=1Lhcot4Wfho1SGtYrobmp1MrZ_YeJwApc&export=download");
-        _keyTexture = await GetSprite("https://drive.usercontent.google.com/u/0/uc?id=1pLjE-n69_A_1mfJG_ZJtmzCsl6OvPRIU&export=download");
+        _coinTexture = _assetService.Get().GetAsset(COIN_STRING);
+        _energyTexture = _assetService.Get().GetAsset(ENERGY_STRING);
+        _keyTexture = _assetService.Get().GetAsset(KEY_STRING);
         _uiView.SetIcons(_coinTexture, _energyTexture, _keyTexture);
     }
 
@@ -156,7 +165,7 @@ public class GameController : Controller{
         var coinSprite = Sprite.Create(_coinTexture,  new Rect(0f, 0f, _coinTexture.width, _coinTexture.height), Vector2.zero);
         var energySprite = Sprite.Create(_energyTexture,  new Rect(0f, 0f, _energyTexture.width, _energyTexture.height), Vector2.zero);
         _endScreenView.OnCollectClicked += HandleCollectClicked;
-        _endScreenView.Initialize(coinSprite, _gameModel.AccumulatedCoins, energySprite, _gameModel.AccumulatedEnergy);
+        _endScreenView.Initialize(_coinTexture, _gameModel.AccumulatedCoins, _energyTexture, _gameModel.AccumulatedEnergy);
     }
 
     private void HandleCollectClicked() {

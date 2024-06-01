@@ -4,9 +4,12 @@ using UnityEngine.SceneManagement;
 
 namespace Scripts {
 
-    public class SceneService : Service, ISceneService {
+    public class SceneService : Service<SceneServiceConfiguration>, ISceneService {
 
         private SceneName _currentScene;
+        
+        public SceneService(string config) : base(config) {
+        }
         
         public override UniTask Initialize() {
 

@@ -1,9 +1,7 @@
-﻿namespace Scripts {
+﻿using UnityEngine;
 
-    public class IAssetService {
+public interface IAssetService {
 
-        
 
-    }
-
+    Texture2D GetAsset(string assetName);
 }

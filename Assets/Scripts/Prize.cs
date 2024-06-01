@@ -5,7 +5,8 @@ using UnityEngine;
 public class Prize {
 
     public PrizeType PrizeType;
-    public Sprite Sprite;
+    public string SpriteName;
+    public Texture2D Texture;
     public long Amount;
 
 }

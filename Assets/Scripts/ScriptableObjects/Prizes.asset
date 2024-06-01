@@ -14,29 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PrizeList:
   - PrizeType: 0
-    Sprite: {fileID: 21300000, guid: af16573ed6518734fb51a11fbb3bf989, type: 3}
+    SpriteName: Key
+    Sprite: {fileID: 0}
     Amount: 1
   - PrizeType: 0
-    Sprite: {fileID: 21300000, guid: af16573ed6518734fb51a11fbb3bf989, type: 3}
+    SpriteName: Key
+    Sprite: {fileID: 0}
     Amount: 1
   - PrizeType: 0
-    Sprite: {fileID: 21300000, guid: af16573ed6518734fb51a11fbb3bf989, type: 3}
+    SpriteName: Key
+    Sprite: {fileID: 0}
     Amount: 2
   - PrizeType: 0
-    Sprite: {fileID: 21300000, guid: af16573ed6518734fb51a11fbb3bf989, type: 3}
+    SpriteName: Key
+    Sprite: {fileID: 0}
     Amount: 3
   - PrizeType: 2
-    Sprite: {fileID: 21300000, guid: 03a02b94461558a41b3f522935f5ceca, type: 3}
+    SpriteName: Energy
+    Sprite: {fileID: 0}
     Amount: 50
   - PrizeType: 1
-    Sprite: {fileID: 21300000, guid: 1933ed32e666b904db6ab832bdd7fe7d, type: 3}
+    SpriteName: Coin
+    Sprite: {fileID: 0}
     Amount: 1000
   - PrizeType: 1
-    Sprite: {fileID: 21300000, guid: 1933ed32e666b904db6ab832bdd7fe7d, type: 3}
+    SpriteName: Coin
+    Sprite: {fileID: 0}
     Amount: 1000
   - PrizeType: 1
-    Sprite: {fileID: 21300000, guid: 1933ed32e666b904db6ab832bdd7fe7d, type: 3}
+    SpriteName: Coin
+    Sprite: {fileID: 0}
     Amount: 1000
   - PrizeType: 1
-    Sprite: {fileID: 21300000, guid: 1933ed32e666b904db6ab832bdd7fe7d, type: 3}
+    SpriteName: Coin
+    Sprite: {fileID: 0}
     Amount: 5000

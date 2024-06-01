@@ -27,7 +27,8 @@ namespace Scripts {
 
             _prize = prize;
             _boxId = boxId;
-            InitializeVisuals(_prize.Sprite, _prize.Amount);
+            var prizeSprite = Sprite.Create(prize.Texture,  new Rect(0f, 0f, prize.Texture.width, prize.Texture.height), Vector2.zero);
+            InitializeVisuals(prizeSprite, _prize.Amount);
             _prizeAnimator.OnMoveComplete += PrizeDisplayed;
             startPosition = startPosition ? startPosition : transform;
             endPosition = endPosition ? endPosition : transform;

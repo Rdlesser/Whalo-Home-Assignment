@@ -24,7 +24,7 @@ public class EndScreenView : MonoBehaviour {
 
     public Action OnCollectClicked;
 
-    public void Initialize(Sprite coinSprite, long coinAmount, Sprite energySprite, long energyAmount) {
+    public void Initialize(Texture2D coinTexture, long coinAmount, Texture2D energyTexture, long energyAmount) {
         
         _collectButton.onClick.AddListener(ReactToCollectClicked);
 
@@ -33,7 +33,7 @@ public class EndScreenView : MonoBehaviour {
             _coinPrize = new Prize() {
                 Amount =  coinAmount,
                 PrizeType = PrizeType.Coins,
-                Sprite = coinSprite
+                Texture = coinTexture
             };
             
             _coinPrizeView.Initialize(0, _coinPrize);
@@ -45,7 +45,7 @@ public class EndScreenView : MonoBehaviour {
             _energyPrize = new Prize() {
                 Amount =  energyAmount,
                 PrizeType = PrizeType.Energy,
-                Sprite = energySprite
+                Texture = energyTexture
             };
             
             _energyPrizeView.Initialize(0, _energyPrize);
