@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Scripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,8 +17,9 @@ public class GameView : MonoBehaviour{
     [SerializeField] private Transform _keyIcon;
 
     private GameModel _gameModel;
-        
-        
+
+    private bool _isOpeningBox = false;
+
     public Action<int> OnBoxClicked;
     public Action<int, Prize> OnPrizeDisplayed;
 
@@ -93,11 +95,13 @@ public class GameView : MonoBehaviour{
 
     private void HandlePrizeDisplayed(int boxId, Prize prize) {
 
+        _isOpeningBox = false;
         OnPrizeDisplayed?.Invoke(boxId, prize);
     }
 
     private void AnimateBoxOpening(int boxId, bool isCollectable = true) {
 
+        _isOpeningBox = true;
         var boxView = _boxViews[boxId];
         boxView.OnLidRemoved += () => AnimateSmokePoof(boxId, isCollectable);
         _boxViews[boxId].AnimateLidRemoval();
@@ -131,13 +135,16 @@ public class GameView : MonoBehaviour{
         }
     }
 
-    public void RevealAllPrizes() {
+    public async UniTask RevealAllPrizes() {
 
         var closedBoxes = _gameModel.GetClosedBoxes();
 
         foreach (var boxId in closedBoxes) {
 
             AnimateBoxOpening(boxId, false);
+            Debug.LogError("Waiting for box opening");
+            await UniTask.WaitUntil(() => !_isOpeningBox);
+            Debug.LogError("Waiting Complete");
         }
     }
 

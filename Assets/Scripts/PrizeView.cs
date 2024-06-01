@@ -48,6 +48,7 @@ namespace Scripts {
         public void DimPrize() {
 
             _canvasGroup.alpha = 0.5f;
+            PrizeDisplayed();
         }
     }
 

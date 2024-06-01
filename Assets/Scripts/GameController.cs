@@ -141,15 +141,10 @@ public class GameController : Controller{
         _uiView.UpdateKeysAmount(_gameModel.Keys + numberOfKeys, _gameModel.Keys, true);
     }
 
-    private void EndGame() {
+    private async void EndGame() {
 
-        RevealAllPrizes();
-        // DisplayEndGamePopup();
-    }
-
-    private void RevealAllPrizes() {
-
-        _gameView.RevealAllPrizes();
+        await _gameView.RevealAllPrizes();
+        DisplayEndGamePopup();
     }
 
     private void DisplayEndGamePopup() {
