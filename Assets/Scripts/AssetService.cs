@@ -31,7 +31,7 @@ public class AssetService : Service<AssetServiceConfig>, IAssetService {
 
             var assetId = _assetToUrlDict[key];
             var assetDirectUrl = $"https://drive.usercontent.google.com/u/0/uc?id={assetId}&export=download";
-            var texture = await GetSprite(assetDirectUrl);
+            var texture = await GetTexture(assetDirectUrl);
             _assetNameToTextureDict[key] = texture;
         }
     }
@@ -46,7 +46,7 @@ public class AssetService : Service<AssetServiceConfig>, IAssetService {
         }
     }
 
-    private async UniTask<Texture2D> GetSprite(string url) {
+    private async UniTask<Texture2D> GetTexture(string url) {
 
         var webRequest = UnityWebRequestTexture.GetTexture(url);
         await webRequest.SendWebRequest().WithCancellation(new CancellationToken());
