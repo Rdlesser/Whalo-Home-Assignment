@@ -6,11 +6,11 @@ namespace Scripts {
     public class GameModel {
 
         public long Coins;
-        public int Energy;
-        public int Keys;
+        public long Energy;
+        public long Keys;
 
         public long AccumulatedCoins;
-        public int AccumulatedEnergy;
+        public long AccumulatedEnergy;
 
         private Queue<Prize> _prizes;
         private List<int> _closedBoxIds;

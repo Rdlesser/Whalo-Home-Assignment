@@ -12,8 +12,13 @@ public class GameController : Controller{
     [SerializeField] private GameView _gameView;
     [SerializeField] private UIView _uiView;
     [SerializeField] private GameConfig _gameConfig;
+    [SerializeField] private EndScreenView _endScreenView;
 
     private GameModel _gameModel;
+
+    private Texture2D _coinTexture;
+    private Texture2D _energyTexture;
+    private Texture2D _keyTexture;
         
     // private ServiceReceiver<IAssetService> _assetService = new();
 
@@ -67,10 +72,10 @@ public class GameController : Controller{
 
         _uiView.Initialize(_gameModel);
         // TODO: Move this to the asset service
-        var coinSprite = await GetSprite("https://drive.usercontent.google.com/u/0/uc?id=1STe0U77LPpDHry2E-TrLwnvNxC1xY9f4&export=download");
-        var energySprite = await GetSprite("https://drive.usercontent.google.com/u/0/uc?id=1Lhcot4Wfho1SGtYrobmp1MrZ_YeJwApc&export=download");
-        var keySprite = await GetSprite("https://drive.usercontent.google.com/u/0/uc?id=1pLjE-n69_A_1mfJG_ZJtmzCsl6OvPRIU&export=download");
-        _uiView.SetIcons(coinSprite, energySprite, keySprite);
+        _coinTexture = await GetSprite("https://drive.usercontent.google.com/u/0/uc?id=1STe0U77LPpDHry2E-TrLwnvNxC1xY9f4&export=download");
+        _energyTexture = await GetSprite("https://drive.usercontent.google.com/u/0/uc?id=1Lhcot4Wfho1SGtYrobmp1MrZ_YeJwApc&export=download");
+        _keyTexture = await GetSprite("https://drive.usercontent.google.com/u/0/uc?id=1pLjE-n69_A_1mfJG_ZJtmzCsl6OvPRIU&export=download");
+        _uiView.SetIcons(_coinTexture, _energyTexture, _keyTexture);
     }
 
     private async UniTask<Texture2D> GetSprite(string url) {
@@ -139,7 +144,7 @@ public class GameController : Controller{
     private void EndGame() {
 
         RevealAllPrizes();
-        DisplayEndGamePopup();
+        // DisplayEndGamePopup();
     }
 
     private void RevealAllPrizes() {
@@ -148,8 +153,11 @@ public class GameController : Controller{
     }
 
     private void DisplayEndGamePopup() {
-            
-        
+
+        _endScreenView.gameObject.SetActive(true);
+        var coinSprite = Sprite.Create(_coinTexture,  new Rect(0f, 0f, _coinTexture.width, _coinTexture.height), Vector2.zero);
+        var energySprite = Sprite.Create(_energyTexture,  new Rect(0f, 0f, _energyTexture.width, _energyTexture.height), Vector2.zero);
+        _endScreenView.Initialize(coinSprite, _gameModel.AccumulatedCoins, energySprite, _gameModel.AccumulatedEnergy);
     }
 
     private void OnDestroy() {

@@ -54,7 +54,7 @@ namespace Scripts {
             UpdateEnergyAmount(0, 0, false);
         }
 
-        public async void UpdateEnergyAmount(int startAmount, int endAmount, bool isAnimated = false) {
+        public async void UpdateEnergyAmount(long startAmount, long endAmount, bool isAnimated = false) {
 
             if (isAnimated) {
                 
@@ -69,7 +69,7 @@ namespace Scripts {
             UpdateKeysAmount(0, 0, false);
         }
 
-        public async void UpdateKeysAmount(int startAmount, int endAmount, bool isAnimated = false) {
+        public async void UpdateKeysAmount(long startAmount, long endAmount, bool isAnimated = false) {
 
             if (isAnimated) {
 

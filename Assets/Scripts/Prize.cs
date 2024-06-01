@@ -6,7 +6,7 @@ public class Prize {
 
     public PrizeType PrizeType;
     public Sprite Sprite;
-    public int Amount;
+    public long Amount;
 
 }
 

@@ -54,13 +54,18 @@ namespace Scripts {
             AnimateBoxOpening(boxId);
         }
 
-        private void SetBoxPrize(int boxId, Prize prize) {
+        private void SetBoxPrize(int boxId, Prize prize, bool isCollectable) {
 
             var prizeContainerTransform = _prizeContainers[boxId].transform;
             var prizeObject = Instantiate(_prizeView, prizeContainerTransform);
             var prizeView = prizeObject.GetComponent<PrizeView>();
             prizeView.OnPrizeDisplayed += HandlePrizeDisplayed;
             prizeView.Initialize(boxId, prize, prizeContainerTransform, GetIconPosition(prize.PrizeType));
+
+            if (isCollectable) {
+                
+                prizeView.PlayCollectAnimation();
+            }
         }
 
         private Transform GetIconPosition(PrizeType prize) {
@@ -70,15 +75,12 @@ namespace Scripts {
 
                 case PrizeType.Keys:
                     return _keyIcon;
-                    break;
 
                 case PrizeType.Coins:
                     return _coinIcon;
-                    break;
 
                 case PrizeType.Energy:
                     return _energyIcon;
-                    break;
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(prize), prize, null);
@@ -90,19 +92,19 @@ namespace Scripts {
             OnPrizeDisplayed?.Invoke(boxId, prize);
         }
 
-        private void AnimateBoxOpening(int boxId) {
+        private void AnimateBoxOpening(int boxId, bool isCollectable = true) {
 
             var boxView = _boxViews[boxId];
-            boxView.OnLidRemoved += () => AnimateSmokePoof(boxId);
+            boxView.OnLidRemoved += () => AnimateSmokePoof(boxId, isCollectable);
             _boxViews[boxId].AnimateLidRemoval();
         }
 
-        private void AnimateSmokePoof(int boxId) {
+        private void AnimateSmokePoof(int boxId, bool isCollectable) {
             
             var boxView = _boxViews[boxId];
             boxView.OnLidRemoved = null;
             _gameModel.TryGetNextPrize(out var prize);
-            SetBoxPrize(boxId, prize);
+            SetBoxPrize(boxId, prize, isCollectable);
             SetSmokeParticles(boxId);
         }
 
@@ -123,9 +125,11 @@ namespace Scripts {
 
         public void RevealAllPrizes() {
 
-            for (int i = 0; i < _gameModel.GetClosedBoxes().Count; i++) {
+            var closedBoxes = _gameModel.GetClosedBoxes();
 
-                AnimateBoxOpening(i);
+            foreach (var boxId in closedBoxes) {
+
+                AnimateBoxOpening(boxId, false);
             }
         }
 

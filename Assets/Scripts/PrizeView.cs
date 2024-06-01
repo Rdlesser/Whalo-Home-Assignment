@@ -14,34 +14,34 @@ namespace Scripts {
         private Prize _prize;
         private int _boxId;
 
-        private FinishState _finishState;
-
-        private static readonly int In = Animator.StringToHash("In");
-
         public Action<int, Prize> OnPrizeDisplayed;
 
-        private void InitializeVisuals(Sprite prizeImage, int prizeAmount) {
+        private void InitializeVisuals(Sprite prizeImage, long prizeAmount) {
 
             _prizeImage.sprite = prizeImage;
             _prizeAmount.text = prizeAmount.ToString();
         }
 
-        public void Initialize(int boxId, Prize prize, Transform startPosition, Transform endPosition) {
+        public void Initialize(int boxId, Prize prize, Transform startPosition = null, Transform endPosition = null) {
 
             _prize = prize;
             _boxId = boxId;
             InitializeVisuals(_prize.Sprite, _prize.Amount);
             _prizeAnimator.OnMoveComplete += PrizeDisplayed;
-            // _finishState = _prizeAnimator.GetBehaviour<FinishState>();
-            // _finishState.OnEnter += PrizeDisplayed;
+            startPosition = startPosition ? startPosition : transform;
+            endPosition = endPosition ? endPosition : transform;
             _prizeAnimator.ConfigureStartAndEndPosition(startPosition, endPosition);
-            _prizeAnimator.Play();
         }
 
         private void PrizeDisplayed() {
 
             _prizeAnimator.OnMoveComplete -= PrizeDisplayed;
             OnPrizeDisplayed?.Invoke(_boxId, _prize);
+        }
+
+        public void PlayCollectAnimation() {
+
+            _prizeAnimator.Play();
         }
 
     }
