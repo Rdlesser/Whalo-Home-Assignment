@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+
+#if UNITY_EDITOR
 using DG.DOTweenEditor;
+#endif
 using DG.Tweening;
 using DG.Tweening.Core;
 using UnityEditor;

@@ -13,12 +13,8 @@ namespace DefaultNamespace {
         private async void Awake() {
             
             var type = GetType();
-            if(_instances.ContainsKey(type)) {
-                Destroy(gameObject);
-                return;
-            }
 
-            _instances.Add(type, this);
+            _instances[type] = this;
             ServiceManager.Inject(this);
             
             try {

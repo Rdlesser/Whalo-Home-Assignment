@@ -12,9 +12,10 @@ namespace DefaultNamespace {
         
         private ServiceReceiver<ISceneService> _sceneService = new();
 
-        protected override async UniTask Initialize() {
+        protected override UniTask Initialize() {
             
             _mainMenuView.OnMenuOptionClicked += HandleMenuOptionClick;
+            return UniTask.CompletedTask;
         }
 
         protected override void Clean() {
