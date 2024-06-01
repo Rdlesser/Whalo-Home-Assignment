@@ -410,6 +410,7 @@ MonoBehaviour:
   _prizeImage: {fileID: 2211726416828446159}
   _prizeAmount: {fileID: 6837655915153080287}
   _prizeAnimator: {fileID: 3377119743254782440}
+  _canvasGroup: {fileID: 7033681080738446319}
 --- !u!114 &3377119743254782440
 MonoBehaviour:
   m_ObjectHideFlags: 0

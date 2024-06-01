@@ -10,6 +10,7 @@ namespace Scripts {
         [SerializeField] private Image _prizeImage;
         [SerializeField] private TMP_Text _prizeAmount;
         [SerializeField] private AToBTool _prizeAnimator;
+        [SerializeField] private CanvasGroup _canvasGroup;
 
         private Prize _prize;
         private int _boxId;
@@ -44,6 +45,10 @@ namespace Scripts {
             _prizeAnimator.Play();
         }
 
+        public void DimPrize() {
+
+            _canvasGroup.alpha = 0.5f;
+        }
     }
 
 }

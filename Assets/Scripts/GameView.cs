@@ -66,6 +66,11 @@ namespace Scripts {
                 
                 prizeView.PlayCollectAnimation();
             }
+
+            else {
+                
+                prizeView.DimPrize();
+            }
         }
 
         private Transform GetIconPosition(PrizeType prize) {
