@@ -18,9 +18,7 @@ public class InitController : Controller {
             _sceneService.ServiceArrived(),
             _assetService.ServiceArrived(),
         });
-            
-            
-        Debug.LogError("Moving to main menu scene");
+        
         _sceneService.Get().MoveToScene(SceneName.MainMenu);
     }
 
