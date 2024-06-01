@@ -101,7 +101,8 @@ namespace Scripts {
             
             var boxView = _boxViews[boxId];
             boxView.OnLidRemoved = null;
-            SetBoxPrize(boxId, _gameModel.GetNextPrize());
+            _gameModel.TryGetNextPrize(out var prize);
+            SetBoxPrize(boxId, prize);
             SetSmokeParticles(boxId);
         }
 
@@ -117,6 +118,14 @@ namespace Scripts {
             foreach (var boxButton in _boxButtons) {
                 
                 boxButton.onClick.RemoveAllListeners();
+            }
+        }
+
+        public void RevealAllPrizes() {
+
+            for (int i = 0; i < _gameModel.GetClosedBoxes().Count; i++) {
+
+                AnimateBoxOpening(i);
             }
         }
 

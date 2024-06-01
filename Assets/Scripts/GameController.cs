@@ -85,6 +85,7 @@ public class GameController : Controller{
 
     private void HandleBoxClick(int boxId) {
 
+        _gameModel.SetBoxOpened(boxId);
         PayKey(_gameConfig.BoxOpeningPrice);
         _gameView.AreBoxesClickable = false;
         _gameView.OpenBox(boxId);
@@ -137,7 +138,13 @@ public class GameController : Controller{
 
     private void EndGame() {
 
+        RevealAllPrizes();
         DisplayEndGamePopup();
+    }
+
+    private void RevealAllPrizes() {
+
+        _gameView.RevealAllPrizes();
     }
 
     private void DisplayEndGamePopup() {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Scripts {
 
@@ -11,7 +12,8 @@ namespace Scripts {
         public long AccumulatedCoins;
         public int AccumulatedEnergy;
 
-        private Queue<Prize> Prizes;
+        private Queue<Prize> _prizes;
+        private List<int> _closedBoxIds;
 
         public GameModel(long coins, int energy, int keys, Queue<Prize> prizes) {
             
@@ -19,19 +21,49 @@ namespace Scripts {
             Energy = energy;
             Keys = keys;
 
-            Prizes = prizes;
+            _prizes = prizes;
+
+            ResetClosedBoxes();
+        }
+
+        private void ResetClosedBoxes() {
+
+            _closedBoxIds = new List<int>();
+            _closedBoxIds.AddRange(Enumerable.Range(0, _prizes.Count));
         }
 
         public bool WereAllPrizesCollected() {
 
-            return Prizes.IsNullOrEmpty();
+            return _prizes.IsNullOrEmpty();
+        }
+
+        public bool TryGetNextPrize(out Prize prize) {
+
+            if (_prizes.Count == 0) {
+                prize = null;
+                return false;
+            }
+
+            prize = GetNextPrize();
+
+            return true;
         }
         
-        public Prize GetNextPrize() {
+        private Prize GetNextPrize() {
 
-            var prize = Prizes.Dequeue();
+            var prize = _prizes.Dequeue();
 
             return prize;
+        }
+
+        public void SetBoxOpened(int boxId) {
+
+            _closedBoxIds.Remove(boxId);
+        }
+
+        public List<int> GetClosedBoxes() {
+
+            return _closedBoxIds;
         }
 
     }
