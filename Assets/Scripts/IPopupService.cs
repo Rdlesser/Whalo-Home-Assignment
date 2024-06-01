@@ -1,10 +1,6 @@
-﻿namespace DefaultNamespace {
-
-    public interface IPopupService {
+﻿public interface IPopupService {
 
 
-        string[] GetPopupNames();
-
-    }
+    string[] GetPopupNames();
 
 }

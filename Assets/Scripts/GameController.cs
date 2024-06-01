@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using DefaultNamespace;
-using Scripts;
 using UnityEngine;
 using UnityEngine.Networking;
 

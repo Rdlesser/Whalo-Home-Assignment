@@ -1,41 +1,36 @@
 ﻿using Cysharp.Threading.Tasks;
-using DefaultNamespace;
 using UnityEngine.SceneManagement;
 
-namespace Scripts {
+public class SceneService : Service<SceneServiceConfiguration>, ISceneService {
 
-    public class SceneService : Service<SceneServiceConfiguration>, ISceneService {
-
-        private SceneName _currentScene;
+    private SceneName _currentScene;
         
-        public SceneService(string config) : base(config) {
-        }
+    public SceneService(string config) : base(config) {
+    }
         
-        public override UniTask Initialize() {
+    public override UniTask Initialize() {
 
-            return default;
-        }
+        return default;
+    }
 
-        public override void Clean() {
+    public override void Clean() {
             
             
+    }
+
+    public void MoveToScene(SceneName scene) {
+
+        if (GetCurrentScene() == scene) {
+            return;
         }
 
-        public void MoveToScene(SceneName scene) {
+        _currentScene = scene;
+        SceneManager.LoadScene((int) scene);
+    }
 
-            if (GetCurrentScene() == scene) {
-                return;
-            }
-
-            _currentScene = scene;
-            SceneManager.LoadScene((int) scene);
-        }
-
-        public SceneName GetCurrentScene() {
+    public SceneName GetCurrentScene() {
             
-            return _currentScene;
-        }
-
+        return _currentScene;
     }
 
 }

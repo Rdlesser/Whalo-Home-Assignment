@@ -1,7 +1,5 @@
 ﻿using System;
-using ScriptableObjects;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [Serializable]
 [CreateAssetMenu(fileName = "GameConfig", menuName = "ScriptableObjects/GameConfig", order = 1)]

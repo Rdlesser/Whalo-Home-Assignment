@@ -1,10 +1,6 @@
-﻿namespace DefaultNamespace {
+﻿public enum SceneName {
 
-    public enum SceneName {
-
-        Loading = 0,
-        MainMenu = 1,
-        Game = 2
-    }
-
+    Loading = 0,
+    MainMenu = 1,
+    Game = 2
 }

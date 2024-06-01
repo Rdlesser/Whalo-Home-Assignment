@@ -1,13 +1,6 @@
-﻿using System;
-using DefaultNamespace;
-
-namespace Scripts {
-
-    public interface ISceneService {
+﻿public interface ISceneService {
         
-        void MoveToScene(SceneName scene);
-        SceneName GetCurrentScene();
-
-    }
+    void MoveToScene(SceneName scene);
+    SceneName GetCurrentScene();
 
 }

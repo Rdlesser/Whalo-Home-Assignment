@@ -1,6 +1,5 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using Scripts;
 
 public class ServiceReceiver<T> : IServiceReceiver {
 

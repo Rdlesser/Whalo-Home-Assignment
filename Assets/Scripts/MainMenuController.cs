@@ -1,68 +1,69 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using Scripts;
 using UnityEditor;
 using UnityEngine;
 
-namespace DefaultNamespace {
+public class MainMenuController : Controller{
 
-    public class MainMenuController : Controller{
-
-        [SerializeField] private MainMenuView _mainMenuView;
+    [SerializeField] private MainMenuView _mainMenuView;
+    [SerializeField] private PopupController _popupController;
+    [SerializeField] private GameObject _menu;
         
-        private ServiceReceiver<ISceneService> _sceneService = new();
+    private ServiceReceiver<ISceneService> _sceneService = new();
 
-        protected override UniTask Initialize() {
-            
-            _mainMenuView.OnMenuOptionClicked += HandleMenuOptionClick;
-            return UniTask.CompletedTask;
-        }
+    protected override UniTask Initialize() {
 
-        protected override void Clean() {
+        _menu.SetActive(true);
+        _mainMenuView.OnMenuOptionClicked += HandleMenuOptionClick;
+        return UniTask.CompletedTask;
+    }
+
+    protected override void Clean() {
             
-            _mainMenuView.OnMenuOptionClicked -= HandleMenuOptionClick;
-        }
+        _mainMenuView.OnMenuOptionClicked -= HandleMenuOptionClick;
+    }
         
-        private void HandleMenuOptionClick(MenuOption menuOption) {
+    private void HandleMenuOptionClick(MenuOption menuOption) {
 
-            switch (menuOption) {
+        switch (menuOption) {
 
 
-                case MenuOption.StartGame:
-                    StartGame();
-                    break;
+            case MenuOption.StartGame:
+                StartGame();
+                break;
 
-                case MenuOption.Events:
-                    GoToEventsScreen();
-                    break;
+            case MenuOption.Events:
+                ShowEventsScreen();
+                break;
 
-                case MenuOption.Quit:
-                    QuitGame();
-                    break;
+            case MenuOption.Quit:
+                QuitGame();
+                break;
 
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(menuOption), menuOption, null);
-            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(menuOption), menuOption, null);
         }
+    }
 
-        private void StartGame() {
+    private void StartGame() {
             
-            _sceneService.Get().MoveToScene(SceneName.Game);
-        }
+        _sceneService.Get().MoveToScene(SceneName.Game);
+    }
 
-        private void GoToEventsScreen() {
-            throw new NotImplementedException();
-        }
+    private async void ShowEventsScreen() {
+            
+        _menu.SetActive(false);
+        await _popupController.ShowPopupScreen();
+        _menu.SetActive(true);
+    }
 
-        private void QuitGame() {
+    private void QuitGame() {
 
 #if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
-            return;
+        EditorApplication.isPlaying = false;
+        return;
 #endif
-            Application.Quit();
-        }
-
+        Application.Quit();
     }
 
 }

@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using DefaultNamespace;
 
 public class PopupService : Service<PopupServiceConfig>, IPopupService {
 

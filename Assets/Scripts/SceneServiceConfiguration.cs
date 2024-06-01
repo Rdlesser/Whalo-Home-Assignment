@@ -1,9 +1,5 @@
-﻿namespace DefaultNamespace {
-
-    public class SceneServiceConfiguration {
+﻿public class SceneServiceConfiguration {
 
         
-
-    }
 
 }

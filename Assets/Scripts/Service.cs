@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using DefaultNamespace;
 using UnityEngine;
 
 public abstract class Service<ConfigT>: IService {

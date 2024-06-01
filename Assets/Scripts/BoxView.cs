@@ -1,35 +1,31 @@
 using System;
 using UnityEngine;
 
-namespace Scripts {
+public class BoxView : MonoBehaviour {
 
-    public class BoxView : MonoBehaviour {
+    [SerializeField] private Animator _animator;
 
-        [SerializeField] private Animator _animator;
-
-        private FinishState _finishState;
+    private FinishState _finishState;
         
-        public Action OnLidRemoved;
+    public Action OnLidRemoved;
         
-        private static readonly int RemoveLid = Animator.StringToHash("RemoveLid");
+    private static readonly int RemoveLid = Animator.StringToHash("RemoveLid");
 
-        public void AnimateLidRemoval() {
+    public void AnimateLidRemoval() {
 
-            _finishState = _animator.GetBehaviour<FinishState>();
+        _finishState = _animator.GetBehaviour<FinishState>();
 
-            if (_finishState != null) {
+        if (_finishState != null) {
 
-                _finishState.OnEnter += LidRemoved;
-            }
+            _finishState.OnEnter += LidRemoved;
+        }
             
-            _animator.SetTrigger(RemoveLid);
-        }
-
-        private void LidRemoved() {
-
-            _finishState.OnEnter -= LidRemoved;
-            OnLidRemoved?.Invoke();
-        }
+        _animator.SetTrigger(RemoveLid);
     }
 
+    private void LidRemoved() {
+
+        _finishState.OnEnter -= LidRemoved;
+        OnLidRemoved?.Invoke();
+    }
 }

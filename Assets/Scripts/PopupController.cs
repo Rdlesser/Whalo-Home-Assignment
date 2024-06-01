@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using DefaultNamespace;
 using UnityEngine;
 
 public class PopupController : Controller {
@@ -27,13 +26,13 @@ public class PopupController : Controller {
                 return default;
         }
 
-        public void ShowPopupScreen() {
+        public async UniTask ShowPopupScreen() {
 
-                _popupView.ShowPopups();
+                await _popupView.ShowPopups();
         }
 
         protected override void Clean() {
-                throw new System.NotImplementedException();
+                
         }
 
 }

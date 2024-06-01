@@ -4,10 +4,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using DefaultNamespace;
-using Scripts;
 using UnityEngine;
-using Semaphore = Scripts.Semaphore;
 
 public static class ServiceManager {
 
@@ -70,7 +67,7 @@ public static class ServiceManager {
         if(_servicesBeingInitialized.ContainsKey(service)) {
             await _servicesBeingInitialized[service].WaitAsync();
         } else {
-            var sem = new Semaphore(0);
+            var sem = new global::Semaphore(0);
             _servicesBeingInitialized.Add(service, sem);
 
             Inject(service);
@@ -177,7 +174,7 @@ public static class ServiceManager {
             }
         }
         private class ServiceAwaiter {
-            public Semaphore Sem = new Semaphore(0);
+            public global::Semaphore Sem = new global::Semaphore(0);
             public object Service;
         }
     }
