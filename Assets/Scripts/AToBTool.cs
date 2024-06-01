@@ -73,9 +73,7 @@ public class AToBTool : MonoBehaviour {
         HandleSequenceReset();
         _tweenSequence = DOTween.Sequence().SetTarget(transform);
 
-        var targetPosition = _endPosition.position;
-
-        AddMoveSequence(targetPosition, ref _tweenSequence);
+        AddMoveSequence(ref _tweenSequence);
         AddScaleSequence(ref _tweenSequence);
         AddRotationSequence(ref _tweenSequence);
 
@@ -114,7 +112,7 @@ public class AToBTool : MonoBehaviour {
         _tweenSequence = null;
     }
 
-    private void AddMoveSequence(Vector3 targetPosition, ref Sequence moveSequence) {
+    private void AddMoveSequence(ref Sequence moveSequence) {
 
         if(!_isPositionAnimated) {
             return;
