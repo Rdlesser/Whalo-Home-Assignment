@@ -1,6 +1,14 @@
 {
-	"name": "DOTweenPro.Scripts",
-	"references": [
-		"DOTween.Modules"
-	]
+    "name": "DOTweenPro.Scripts",
+    "rootNamespace": "",
+    "references": ["GUID:4479560d56dd23b4380b480f8a45134e"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

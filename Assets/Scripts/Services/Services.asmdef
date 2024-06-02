@@ -1,7 +1,11 @@
 {
-    "name": "DOTween.Modules",
+    "name": "Services",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:48afb5fadbc3d354094c0a1061fe92ee",
+        "GUID:f01feb2050c5fa24e96cdbdeb25f47d4"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

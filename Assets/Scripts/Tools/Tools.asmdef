@@ -1,7 +1,11 @@
 {
-    "name": "DOTween.Modules",
+    "name": "Tools",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:4479560d56dd23b4380b480f8a45134e",
+        "GUID:b7aa28ce81a1be64788bf42017117b14",
+        "GUID:029c1c1b674aaae47a6841a0b89ad80e"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
